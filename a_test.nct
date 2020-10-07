@@ -1,0 +1,4 @@
+Script: "A Test"
+Variable: intent = "what is the weather"
+Neon Speak: "It is currently {skill("what is the weather", weather)}"
+Exit
