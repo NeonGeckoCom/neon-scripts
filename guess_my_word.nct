@@ -1,0 +1,451 @@
+Script: "Guess My Word"
+Language: en-us, female
+
+# Demonstration word game player from Neon AI
+# "Hi {userName}. Let's play the game guess my 7 word popular phrase. It very simple. I will choose a 7 word phrase and tell you one word. Then you guess a word, and if it is in the seven work phrase I will tell you its position or to guess again. Anytime you want you can guess the phrase, just say I guess  and I will tell you if you're right. If you want me to tell you what you've already guessed, just say recap or history. Say hint and I will tell you another word."
+# Later n word phrases; n letter words; subject specific popular phrase input from Wolfram, google; foreign language
+
+# Set up wait time for participant responses
+Variable: timeoutReturnLabel = AnnounceVersion
+Timeout: 30, TIMEOUT
+
+@AnnounceVersion
+
+Name Speak: Gamon,"Neon Word Game Demonstration Version 2020 08 06 22:30 </speak> Testing"
+# Announce version ("Testing" is displayed as text and is not spoken)
+
+Variable: sevenWordPhraseArray = "A DATE THAT WILL LIVE IN INFAMY",
+    "A DAY THAT WILL LIVE IN INFAMY",
+    "A WORD TO THE WISE IS ENOUGH",
+    "A WORD TO THE WISE IS SUFFICIENT",
+    "AND A MERRY OLD SOUL WAS HE",
+    "CAN'T SEE THE FOREST FOR THE TREES",
+    "CHILL OUT AND PLAY SOME VIDEO GAMES",
+    "COME OUT COME OUT WHEREVER YOU ARE",
+    "I SMELL THE BLOOD OF AN ENGLISHMAN",
+    "I'M LATE FOR A VERY IMPORTANT DATE",
+    "IF IT AIN'T BROKE DON'T FIX IT",
+    "IF YOU BUILD IT HE WILL COME",
+    "IF YOU BUILD IT THEY WILL COME",
+    "IT WAS A DARK AND STORMY NIGHT",
+    "IT'S ALL HUMBUG I TELL YOU HUMBUG",
+    "JACK AND JILL WENT UP THE HILL",
+    "JACK FELL DOWN AND BROKE HIS CROWN",
+    "LAUGH AND THE WORLD LAUGHS WITH YOU",
+    "LEAP TALL BUILDINGS IN A SINGLE BOUND",
+    "LIFE LIBERTY AND THE PURSUIT OF HAPPINESS",
+    "LIONS AND TIGERS AND BEARS OH MY",
+    "LITTLE BO PEEP HAS LOST HER SHEEP",
+    "LITTLE PIGS LITTLE PIGS LET ME IN",
+    "LIVE FROM NEW YORK IT'S SATURDAY NIGHT",
+    "NEITHER A BORROWER NOR A LENDER BE",
+    "NOT BY THE HAIR ON MY CHINNY-CHIN-CHIN",
+    "NOT BY THE HAIR OF MY CHINNY-CHIN-CHIN",
+    "NOW I LAY ME DOWN TO SLEEP",
+    "OH WHAT A TANGLED WEB WE WEAVE",
+    "ONE THING I CAN SAY FOR SURE",
+    "OLD MOTHER HUBBARD WENT TO THE CUPBOARD",
+    "OVER THE RIVER AND THROUGH THE WOODS",
+    "THE BEST-LAID SCHEMES OF MICE AND MEN",
+    "THE BEST-LAID PLANS OF MICE AND MEN",
+    "DISCRETION IS THE BETTER PART OF VALOR",
+    "THE BETTER PART OF VALOR IS DISCRETION",
+    "THE FACE THAT LAUNCHED A THOUSAND SHIPS",
+    "THE HABITS OF HIGHLY EFFECTIVE PEOPLE",
+    "THE STUFF THAT DREAMS ARE MADE FROM",
+    "THE STUFF THAT DREAMS ARE MADE OF",
+    "THE STUFF OF WHICH DREAMS ARE MADE",
+    "THE STUFF FROM WHICH DREAMS ARE MADE",
+    "THINGS THAT GO BUMP IN THE NIGHT",
+    "THIS IS THE SONG THAT NEVER ENDS
+    "TO ERR IS HUMAN TO FORGIVE DIVINE",
+    "TO FETCH HER POOR DOG A BONE",
+    "WE HOLD THESE TRUTHS TO BE SELF-EVIDENT",
+    "WE THE PEOPLE OF THE UNITED STATES",
+    "WHEN IN THE COURSE OF HUMAN EVENTS"
+
+Variable: usedPhrases
+Variable: chosenPhrase
+Variable: hintCount
+Variable: sayNext
+Variable: foundWords
+Variable: chosenPhraseWords
+Variable: chosenPhraseWordsByLen
+Variable: iWord
+Variable: blankCount
+Variable: userInput
+Variable: userInputWords
+Variable: userInputWordsLen
+
+usedPhrases[*] = ""
+
+Variable: True = 1		
+Variable: False = 0		
+Variable: exitList = "exit", "cancel", "never mind"
+Variable: noList
+Variable: yesList
+Variable: alertsPhraseList
+Variable: inProgressList
+Variable: heyList
+Variable: askPrompt
+Variable: returnLabel
+Variable: heardSilence
+Variable: falseAlarmCount
+Variable: askReturnValue
+Variable: userName
+Variable: moreAppInfo
+Variable: customizeSettings
+Variable: customizeLanguage
+Variable: customizeProsody
+Variable: photoTime
+Variable: enableNeonApps
+
+@StartUp
+
+# Initialize
+
+# exitList = "exit", "cancel", "never mind"
+noList = "no", "not now", "never mind", "nope", "n" 
+yesList = "yes", "yup", "y"
+
+alertsPhraseList = "help", "I need help", "help me", "emergency", "this is an emergency", "i need a doctor", "i need a doctor", "i need a doctor", "i need a doctor", "i need a doctor", "i need a nurse", "i need aid", "i need a caregiver", "i need assistance", "i fell", "i can't get up", "fire"
+
+inProgressList = "what time is it", "Remind me to", "Play", "Record this", "Send an email", "Send a text"
+
+heyList = "hey Gamon", "Gamon are you there", "is anybody listening", "what time is it"
+
+speechGenderList = "female", "male"
+speechRateList = "medium", "fast", "slow"
+speechAccentList = "American", "British", "Australian"
+
+askPrompt = ""
+returnLabel = "" 
+heardSilence = ""
+falseAlarmCount = 0
+askReturnValue = ""
+userName = ""
+moreAppInfo = ""
+customizeSettings = ""
+customizeLanguage = ""
+customProsody = "rate='medium'"
+photoTime = ""
+enableNeonApps = {True}
+
+# Ask to install assistant
+
+@PromptInstallAssistant
+
+returnLabel = InstallAssistant
+timeoutReturnLabel = PromptInstallAssistant
+Name Speak: Gamon,"Hi, I'm Gamon. I'm a demonstration word game player from Neon AI. Thank you for helping test my conversational skills."
+askPrompt = "Please tell me your name, or you can say cancel to exit."
+GOTO : ASK
+
+@InstallAssistant
+
+userName = {askReturnValue}
+
+Name Speak: Gamon,"Hi {userName}. I am glad you chose to play word games with me."
+
+## Offer additional information
+
+@ReAskMoreInfo
+
+Name Speak: Gamon,"Before starting the Neon Word Game, would you like more information on the Neon conversational AI?"
+timeoutReturnLabel = ReAskMoreInfo
+voice_input(moreAppInfo)
+if {moreAppInfo} IN {noList[*]}:
+    GOTO : PromptCustomize
+
+Name Speak: Gamon,"Hi {userName}. I'm Gamon the word games playing assistant from Neon AI. I am an artificial intelligence personal assistant, I'm augmented with Neon Gecko open source code and CPI Corp patented technology."
+
+# Customize
+
+@PromptCustomize
+
+## Offer customization of settings for administrator, voice and system settings
+## Set up PA voice: name, gender, accent, pitch, speed, [Later: language, diction, empathy]
+## Set up system settings: timeoutSeconds (wait time for user input)
+
+customLanguage = ""
+enableNeonApps = {True}		
+
+Name Speak: Gamon,"Would you like to customize the Neon Word Game settings to change my voice?"
+# Later: Provide example of new Language/Prosody and offer reset
+
+timeoutReturnLabel = PromptCustomize
+voice_input(customizeSettings)
+if {customizeSettings} !IN {yesList[*]}:
+    GOTO : BeginAssistant
+
+Name Speak: Gamon,"Hi {userName}. You can customize my voice for the Neon demonstration conversational game player. You can say female, male, normal, fast, slow, American, British or Australian, or say no change. </speak>"
+
+@ReAskCustomize
+
+# Name Speak: Gamon,"Would you like to change the voice of the Neon conversational Word Game Assistant?"
+
+timeoutReturnLabel = ReAskCustomize
+voice_input(customizeSettings)
+if {customizeSettings} == "":
+    GOTO : PromptCustomize
+if {customizeSettings} CONTAINS "no change":
+    GOTO : BeginAssistant
+if {customizeSettings} IN {noList[*]}:
+    GOTO : BeginAssistant
+
+# Variable: britWords = british, gb, uk
+if {customizeSettings} CONTAINS british, gb, uk:
+    customLanguage = "'en-GB'"
+else
+    if {customizeSettings} CONTAINS "Australian, AU, aussie":
+        customLanguage = "en-AU"
+    else
+        customLanguage = "en-us"
+
+if {customizeSettings} CONTAINS "female":
+    customLanguage = "{customLanguage} female"
+else
+    customLanguage = "{customLanguage} male"
+
+Language: {customLanguage}
+
+if {customizeSettings} CONTAINS "fast":
+    customProsody = "rate='fast'"
+else
+    if {customizeSettings} CONTAINS "slow":
+        customProsody = "rate='slow'"
+    else
+        customProsody = "rate='medium'"
+
+@ReAskApps
+
+Name Speak: Gamon,"Would you like to enable more Neon applications including playing music, playing other games, taking notes, setting reminders, making calculation, requesting general information or changing my voice?"		
+
+timeoutReturnLabel = ReAskApps		
+voice_input(customizeSettings)
+if {customizeSettings} == "":		
+    GOTO : ReAskApps		
+
+if {customizeSettings} IN {noList[*]}:		
+    enableNeonApps = {False}		
+    GOTO : BeginAssistant		
+
+@BeginAssistant
+
+timeoutReturnLabel = WaitForAlertPhrase
+Name Speak: Gamon,"<prosody {customProsody}> Your demonstration word game assistant has signed in. If you want to know if I am listening, you can say, hey Gamon , or, Gamon are you there. </prosody>"
+
+Name Speak: Gamon,"Hi {userName}. Let's play the game guess my 7 word popular phrase. It very simple. I will choose a 7 word phrase and tell you one word. Then you guess a word, and if it is in the seven work phrase I will tell you its position or to guess again. Anytime you want you can guess the phrase, just say I guess  and I will tell you if you're right. If you want me to tell you what you've already guessed, just say recap or history. Say hint and I will tell you another word."
+
+### SET UP GAME
+
+# Choose New Phrase
+@ChooseNewPhrase
+chosenPhrase = random(sevenWordPhraseArray)
+# Check if used before
+if usedPhrases CONTAINS chosenPhrase
+    GOTO : ChooseNewPhrase
+
+# Add New Phrase to list of phrased used
+usedPhrases = chosenPhrase
+
+hintCount = 0
+sayNext = ""
+foundWords[*] = ""
+
+# Build word row for the sevenWordPhrase
+Python: chosenPhraseWords = chosenPhrase.split()
+# Build word row by word length [0]..[6]
+Python: chosenPhraseWordsByLen = chosenPhraseWords.sort(key=len)
+
+@NextHint
+
+# Give first or next hint
+if foundWords CONTAINS chosenPhraseWordsByLen[hintCount] :
+    Python: hintCount++
+    GOTO : NextHint
+Name Speak: Gamon,"Hint {hintCount}, the {sayNext} longest word is" {chosenPhraseWordsByLen[hintCount]}
+foundWords = {chosenPhraseWordsByLen[hintCount]}
+Python: hintCount++
+sayNext = "next"
+
+@GuessNextWord
+
+Name Speak: Gamon,"Here's where we're at"
+iWord = 0
+blankCount = 0
+LOOP SayFoundWords
+    if chosenPhraseWord[iWord] in foundWords :
+        Name Speak: Gamon,chosenPraseWord[i]
+    else
+        Name Speak: Gamon,"blank"
+        Python: blankCount++
+    Python: iWord++
+LOOP SayFoundWords UNTIL iWord >= 7
+
+if blankCount == 0
+    Name Speak: Gamon,"Game Over! Thank you {userName} for playing with me"
+    Name Speak: Gamon,"Let's play again"
+    GOTO : ChooseNewPhrase
+
+
+### Wait for Gamon/Emergency/Neon activiation alert phrase
+
+@WaitForAlertPhrase
+
+askPrompt = "Say I guess followed by a word, or I guess followed a phrase, or hint or recap or guessed words or exit"
+timeoutReturnLabel = WaitForAlertPhrase
+returnLabel = GotUserPhrase
+Goto : ASK
+
+@GotUserPhrase
+
+userInput = askReturnValue
+if {userInput} == "" :
+    GOTO : ReAskGuess
+
+if {userInput} STARTSWITH "hint" :
+    GOTO : NextHint
+
+if {userInput} IN "guessed words", "recap", "history" :
+    Name Speak: Gamon, "Here are your mis guessed words: {guessedWords}"
+    GOTO : GuessNextWord
+
+if {userInput} STARTSWITH "I guess" :
+    Python: userInputWords = userInput.split()
+    Python: userInputWordsLen = len(userInputWords) 
+    Python: userInputWords = userInput.split()
+
+    if userInputWordsLen == 3 :
+        guessedWord = userInputWords[2]
+        if chosenPhraseWords[*] CONTAINS guessedWord :
+            if guessedWord !IN foundWords[*] :
+                foundWords = guessedWord
+            else
+                if guessedWord !IN misGuessedWords[*] :
+                    misGuessedWords = guessedWord
+            GOTO : GuessNextWord
+
+    if userInputWordsLen != 9 :
+        # wrong number of words
+        Name Speak: Gamon,"I'm sorry {userName} I heard the wrong number of words."
+        Name Speak: Gamon,"I heard {userInputWords}"
+        Name Speak: Gamon,"Please try again."
+        GOTO : GuessNextWord
+
+    if userInputWords[2:] != chosenPhrase
+        Name Speak: Gamon,"I heard {userInputWords}"
+        Name Speak: Gamon,"I'm sorry {userName} that's not the popular phrase I'm thinking of."
+        Name Speak: Gamon,"Please try again."
+        GOTO : GuessNextWord
+
+    Name Speak: Gamon, "Yay {userName} userInputWords[2:] is correct."
+    Name Speak: Gamon,"Game Over! Thank you {userName} for playing with me"
+    Name Speak: Gamon,"Let's play again"
+    GOTO : ChooseNewPhrase
+
+
+### SYSTEM ALERT PHRASES
+
+## Did user ask for "help" 
+if {askReturnValue} !IN {alertsPhraseList[*]}:
+    ## Not an emergency alert, check for secondary (in progress)
+    if {enableNeonApps}:
+        ## if {askReturnValue} CONTAINS {inProgressList[*]}:
+        if {askReturnValue} STARTSWITH {inProgressList[*]}:
+            Case: 
+                # inProgressList = "what time is it", "Remind me to", "Play", "Record this", "Send an email", "Send a text"
+
+            Name Speak: Gamon,"I'm sorry {userName} that is under construction."
+    ## Not a Gamon/Alert/Neon activation phrase, listen again
+    GOTO : WaitForAlertPhrase
+
+# Possible EMERGENCY
+
+Name Speak: Gamon,"The Emergency Assistant heard an emergency alert. I heard {askReturnValue}"
+Reconvey : askReturnValue
+Name Speak: Gamon,"</speak>PA 6 did reconvey"
+
+@PromptConfirmHelp
+
+askPrompt = "Please say just kidding if this is not an emergency"
+returnLabel = ConfirmHelp
+GOTO : ASK
+@ConfirmHelp
+
+## Did user REALLY ask for "help"? 
+if {askReturnValue} == "":
+    Name Speak: Gamon,"The Emergency Assistant heard nothing. I heard"
+    Reconvey : askReturnValue
+    Name Speak: Gamon,"</speak>PA 8 did reconvey of nothing heard"
+
+    ## PA heard nothing after emergency request .. if second time then this is an emergency
+    if {heardSilence} == {True} :
+        GOTO : Emergency
+    heardSilence = {True}
+    ## Increase volume and speak slowly
+    Name Speak: Gamon,"<prosody volume='+100%' rate='slow'>{userName}! I need to hear from you! Is this an emergency?</prosody>"
+    GOTO : PromptConfirmHelp
+if {askReturnValue} CONTAINS "just kidding", "never mind", "not an emergency":
+    Name Speak: Gamon,"The Emergency Assistant heard you say this is not an emergency. I heard"
+    Reconvey : askReturnValue
+    ### Name Speak: Gamon,"</speak>Did reconvey of jk"
+
+    ## User said jk so restart listening
+    Name Speak: Gamon,"Please say help again if this is an emergency."
+    Python: falseAlarmCount = {falseAlarmCount} + 1
+    GOTO : WaitForAlertPhrase
+
+# EMERGENCY
+
+@Emergency
+
+Name Speak: Gamon,"<prosody volume='+100%' rate='normal'>{userName}! Needs! Help! This is an EMERGENCY</prosody>"
+
+Name Speak: Gamon,"The Emergency Assistant would now send an emergency alert, sound an alarm, keep engaged with the user, and send updated alerts to the caregiver."
+
+Name Speak: Gamon,"Gamon test completed. Say start again to start again?"
+voice_input{askReturnValue}
+if {askReturnValue} == "start again":
+    Name Speak: Gamon,"</speak> Gamon is restarting. Thanks again."
+    GOTO : StartUp
+
+Name Speak: Gamon,"Gamon exiting. Thanks again for helping test my skills."
+exit
+
+# ========== Subroutines
+
+@ASK
+# The ASK subroutine speaks the askPrompt and waits for a response. If the response is a command to Gamon to perform an action, then the request is effected and Gamon continues waiting for a response, otherwise, the response is returned to the caller in the askReturnValue. 
+# Input parameters: askPrompt, returnLabel and timeOutReturnLabel
+# Result parameter: askReturnValue
+
+### Name Speak: Gamon,"Ask 1 Starting"
+if {askPrompt}:
+    Name Speak: Gamon," {askPrompt} "
+### Name Speak: Gamon,"Ask 2 Starting ask subroutine"
+voice_input(askReturnValue)
+### Name Speak: Gamon,"Ask 3 got input"
+if {askReturnValue} IN {exitList[*]}:
+    Name Speak: Gamon,"Say yes to confirm exiting Gamon, the Neon Word Game Assistant"
+    voice_input(askReturnValue)
+    if {askReturnValue} IN {yesList[*]}:
+        Name Speak: Gamon,"Gamon , the Neon Word Game Assistant, signing off"
+        exit
+    else
+        GOTO : ASK
+### Name Speak: Gamon,"Ask 4 not cancel command {askReturnValue}"
+if {askReturnValue} IN {heyList[*]}:
+    Name Speak: Gamon,"<prosody {customProsody}> {userName}, Gamon the Word Game Assistant demo here. I'm listening all the time but I don't <phoneme alphabet= "x-sampa" ph= "rikord">record</phoneme> everything you say. I only make recordings of calls for help or if you say emergency. </prosody>"
+# Note - Disambiguation for the pronunciations of "record": <phoneme alphabet= "x-sampa" ph= "rikord">record</phoneme> Verb as in "I record everything you say" vs. Noun as in "Make a record of the conversation".
+    Name Speak: Gamon,"The time is"
+    Execute : "Neon what time is it"
+    if {falseAlarmCount} != 0:
+        Name Speak: Gamon,"The false alarm count is {falseAlarmCount}!"
+    GOTO : ASK
+### Name Speak: Gamon,"Ask 5 About to return to {returnLabel}"
+GOTO: {returnLabel}
+
+
+@TIMEOUT
+GOTO: {timeoutReturnLabel}
