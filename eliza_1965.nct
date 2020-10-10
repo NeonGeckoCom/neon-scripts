@@ -106,7 +106,7 @@ LOOP pre
     sub_key{input, key_sub}
 
     Name speak: Eliza: {input}
-    if {user_speech} in {quit}:
+    if {user_speech} IN {quit}:
         Exit
 LOOP pre END
 
