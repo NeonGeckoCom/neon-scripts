@@ -126,7 +126,7 @@ Name Speak: Pat, "Hi {userName}. I am glad you chose to install the Neon Patient
 
 Name Speak: Pat, "Before starting the Patient Assistant would you like more information on the Neon conversational patient assistance application?"
 timeoutReturnLabel = ReAskMoreInfo
-voice_input{moreAppInfo}
+voice_input(moreAppInfo)
 if {moreAppInfo} IN {noList[*]}:
     Goto: PromptCustomize
 
@@ -149,7 +149,7 @@ Name Speak: Pat, "Would you like to customize the Patient Assistant settings to 
 # Name Speak: Pat, "Would you like to customize the Patient Assistant settings for administrator, voice and PAT system settings?"
 
 timeoutReturnLabel = PromptCustomize
-voice_input{customizeSettings}
+voice_input(customizeSettings)
 if {customizeSettings} !IN {yesList[*]}:
     Goto: BeginAssistant
 
@@ -160,7 +160,7 @@ Name Speak: Pat, "Hi {userName}. You can customize the voice for the Neon demons
 # Name Speak: Pat, "Would you like to change the voice of the Neon conversational patient assistance application?"
 
 timeoutReturnLabel = ReAskCustomize
-voice_input{customizeSettings}
+voice_input(customizeSettings)
 if {customizeSettings} == "":
     Goto: PromptCustomize
 if {customizeSettings} CONTAINS "no change":
@@ -207,7 +207,7 @@ else
 Name Speak: Pat, "Would you like to enable more Neon patient assistance applications including playing music, playing games, reminders for medicine, hydration, meals and sleep, requests to record symptoms or other stats,  and to request general information or assistance with math?"
 
 timeoutReturnLabel = ReAskApps
-voice_input{customizeSettings}
+voice_input(customizeSettings)
 if {customizeSettings} == "":
     Goto: ReAskApps
 
@@ -323,7 +323,7 @@ Name Speak: Pat, "<prosody volume='+100%' rate='normal'>{userName}! Needs! Help!
 Name Speak: Pat, "Pat the Patient Assistant would now send an emergency alert, sound an alarm, keep engaged with the patient, and send updated alerts to the caregiver."
 
 Name Speak: Pat, "Pat test completed. Say start again to start again?"
-voice_input{askReturnValue}
+voice_input(askReturnValue)
 if {askReturnValue} == "start again":
     Name Speak: Pat, "</speak>Pat is restarting. Thanks again."
     Goto: StartUp
@@ -342,11 +342,11 @@ exit
 if {askPrompt}:
     Name Speak: Pat, " {askPrompt} "
 ### Name Speak: Pat, "Ask 2 Starting ask subroutine"
-voice_input {askReturnValue}
+voice_input(askReturnValue)
 ### Name Speak: Pat, "Ask 3 got input"
 if {askReturnValue} IN {exitList[*]}:
     Name Speak: Pat, "Say yes to confirm exiting Pat, the Neon AI Patient Assistant"
-    voice_input{askReturnValue}
+    voice_input(askReturnValue)
     if {askReturnValue} IN {yesList[*]}:
         Name Speak: Pat, "Pat, the Neon AI Patient Assistant, signing off"
         exit

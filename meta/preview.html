@@ -51,14 +51,14 @@ Neon speak: "Please tell me what apple.com web page you'd like to see. You can s
 LOOP WN
 ....voice_input(chosen)
 ....# Neon speak: "navigating to {chosen}"
-....if {chosen} == "quit":
+....If {chosen} == "quit":
 ........Neon speak: "say pause to turn off the mic or say exit to close the window."
 ........voice_input(chosen)
-........if {chosen} == "pause":
+........If {chosen} == "pause":
 ............# execute skill to turn off mic
 ............Execute: "neon mute microphone"
 ....else:
-........if closest(chosen,options):
+........If closest(chosen,options):
 ............Execute: "neon browse to {closest(chosen,options)}"
 ........else:
 ............Neon speak: "Page not found"
@@ -178,7 +178,7 @@ Variable: userSelfRefsList =  "self", "myself", "me"
 Variable: userElseRefsList =  "else", "someone else", "friend"
 
 Name Speak: Robbie, "<speak></speak>This demonstration is based on the CDC's guide recommendations for Covid-19 phone screening, as of June 2020, and should not be considered a CDC or medically approved application at this time."
-# Name Speak: Robbie : "<speak></speak>Some text to print and not speak."
+# Name Speak: Robbie, "<speak></speak>Some text to print and not speak."
 
 
 #GREETING
@@ -198,7 +198,7 @@ voice_input(moreAppInfo)
 #if {moreAppInfo} !IN {yesNoList[*]}:
 #    Goto: promptMoreAppInfo
 #if {moreAppInfo} IN {noList[*]}:
-if {moreAppInfo} IN {noList[*]}:
+If {moreAppInfo} IN {noList[*]}:
     Goto: BeginScreening
 Name Speak: Robbie, "The Neon conversational demonstration Covid-19 screening application is based on the Center for Disease Control and Prevention recommendations for the Coronavirus Disease 2019 Telephone Response Guide. The Covid-19 screening script is available at CDC dot gov website. </speak>https://www.cdc.gov/coronavirus/2019-ncov/hcp/phone-guide/ "
 
@@ -211,11 +211,11 @@ Name Speak: Robbie, "In response to screening questions you can say details to h
 @promptUserRef
 Name Speak: Robbie, "Are you asking for help for yourself or for someone else?"
 voice_input(covidUserRef)
-if {covidUserRef} IN {detailsList[*]}:
+If {covidUserRef} IN {detailsList[*]}:
     Name Speak: Robbie, "For record keeping, we need to keep track of who we interact with."
     Goto: promptUserRef
 #if {covidUserRef} == "myself":
-if {covidUserRef} IN {userSelfRefsList[*]}:
+If {covidUserRef} IN {userSelfRefsList[*]}:
     userRef1 = "have you"
     userRef2 = "are you"
     userRef3 = "do you"
@@ -223,7 +223,7 @@ if {covidUserRef} IN {userSelfRefsList[*]}:
     userRef2C = "Are you"
     userRef3C = "Do you"
 else:
-    if {covidUserRef} IN {userElseRefsList[*]}:
+    If {covidUserRef} IN {userElseRefsList[*]}:
         userRef1 = "has the person you are calling about"
         userRef2 = "is the person for whom you are calling"
         userRef3 = "does the person you are calling about"
@@ -244,10 +244,10 @@ Name Speak: Robbie, "Got it {userName}."
 Name Speak: Robbie, "This audio guide is for people who are ill. {userRef2C} ill?"   
 # "Are you ill (or contacting on behalf of someone who is ill)?" 
 voice_input(covidIll)
-if {covidIll} IN {detailsList[*]}:
+If {covidIll} IN {detailsList[*]}:
     Name Speak: Robbie, "We are demonstrating CDC's Covid-19 symptom screening for people who feel ill. If you are not showing symptoms of illness, then this screening system can not help you. If you are concerned you have Covid-19 infection you should contact your care advisor, since some people who have the Covid-19 infection are non-symptomatic."
     Goto: promptUserRef
-if {covidIll} IN {noList[*]}:
+If {covidIll} IN {noList[*]}:
     Name Speak: Robbie, "You're not symptomatic of Covid-19 but if you are concerned you have Covid-19 infection you should contact your care advisor."
     Name Speak: Robbie, "Option for additional information on Covid-19 symptoms are in progress."
     Goto: A-noSymptoms 
@@ -1003,7 +1003,7 @@ voice_input(moreAppInfo)
 #if {moreAppInfo} !IN {yesNoList[*]}:
 #    Goto: promptMoreAppInfo
 #if {moreAppInfo} IN {noList[*]}:
-if {moreAppInfo} IN {noList[*]}:
+If {moreAppInfo} IN {noList[*]}:
     Goto: BeginScreening
 Name Speak: "Robbie", "The Neon conversational demonstration Covid-19 screening application is based on the Center for Disease Control and Prevention recommendations for the Coronavirus Disease 2019 Telephone Response Guide. The Covid-19 screening script is available at CDC dot gov website. </speak>https://www.cdc.gov/coronavirus/2019-ncov/hcp/phone-guide/ "
 
@@ -1016,11 +1016,11 @@ Name Reconvey: "Robbie", "In response to screening questions you can say details
 @promptUserRef
 Name Reconvey: "Robbie", "Are you asking for help for yourself, or for someone else?"
 voice_input(covidUserRef)
-if {covidUserRef} IN {detailsList[*]}:
+If {covidUserRef} IN {detailsList[*]}:
     Name Speak: "Robbie", "For record keeping, we need to keep track of who we interact with."
     Goto: promptUserRef
-#if {covidUserRef} == "myself":
-if {covidUserRef} IN {userSelfRefsList[*]}:
+#If {covidUserRef} == "myself":
+If {covidUserRef} IN {userSelfRefsList[*]}:
     userRef1 = "have you"
     userRef2 = "are you"
     userRef3 = "do you"
@@ -1028,7 +1028,7 @@ if {covidUserRef} IN {userSelfRefsList[*]}:
     userRef2C = "Are you"
     userRef3C = "Do you"
 else:
-    if {covidUserRef} IN {userElseRefsList[*]}:
+    If {covidUserRef} IN {userElseRefsList[*]}:
         userRef1 = "has the person you are calling about"
         userRef2 = "is the person for whom you are calling"
         userRef3 = "does the person you are calling about"
@@ -1052,22 +1052,22 @@ Name Reconvey: "Robbie", "Are you ill of contacting on behalf of someone who is 
 
 # "Are you ill (or contacting on behalf of someone who is ill)?" 
 voice_input(covidIll)
-if {covidIll} IN {detailsList[*]}:
+If {covidIll} IN {detailsList[*]}:
     Name Reconvey: "Robbie", "We are demonstrating CDC's Covid-19 symptom screening for people who feel ill."
     Name Reconvey: "Robbie", "If you are not showing symptoms of illness, then this screening system can not help you."
     Name Reconvey: "Robbie", "If you are concerned you have Covid-19 infection you should contact your care advisor, since some people who have the Covid-19 infection are non-symptomatic."
     Goto: promptUserRef
-if {covidIll} IN {noList[*]}:
+If {covidIll} IN {noList[*]}:
     Name Speak: "Robbie", "You're not symptomatic of Covid-19 but if you are concerned you have Covid-19 infection you should contact your care advisor."
     Name Speak: "Robbie", "Option for additional information on Covid-19 symptoms are in progress."
     Goto: A-noSymptoms 
 # TODO: This could do something other than run exit, continue prompting? Ask to start over? Ask to check other symptoms?
     # Exit - Only for sick people
 else:
-    if {covidIll} IN {yesList[*]}:
+    If {covidIll} IN {yesList[*]}:
         Goto: promptAge
     else:
-        if {covidIll} == "start over":
+        If {covidIll} == "start over":
             Goto: startCovidScreening
         else:
             Goto: promptIll
@@ -1076,13 +1076,13 @@ else:
 @promptAge
 Name Reconvey: "Robbie", "This audio guide is for people over 5. How many years old are you or the person you are calling about?"
 voice_input(covidAge)
-if {covidAge} IN {detailsList[*]}:
+If {covidAge} IN {detailsList[*]}:
     Name Speak: "Robbie", "This demonstration of conversational Covid-19 symptom screening is for people over the age of 5. Thank you for helping test the Neon Covid-19 screener."
     Goto: promptAge
-if {covidAge} < 5:
+If {covidAge} < 5:
     Goto: C-lessThanFive 
 else:
-    if {covidAge} >= 5:
+    If {covidAge} >= 5:
         Goto: promptLifeThreatening
     else:
         Goto: promptAge
@@ -1094,11 +1094,11 @@ else:
 @promptLifeThreatening
 Name Speak: "Robbie", "{userRef3C} have a life-threatening emergency medical condition? Say details for details."
 voice_input(covidLifeThreat)
-if {covidLifeThreat} IN {noList[*]}:
+If {covidLifeThreat} IN {noList[*]}:
     Goto: promptContact  
 else:
     # if {covidLifeThreat} == "details":
-    if {covidLifeThreat} IN {detailsList[*]}:
+    If {covidLifeThreat} IN {detailsList[*]}:
         Name Speak: "Robbie", "Life-threatening emergency medical conditions include these symptoms:"
         Name Speak: "Robbie", "Extremely difficult breathing (can't talk without gasping for air); "
         Name Speak: "Robbie", "Blue-colored lips or face; Severe, constant dizziness or lightheadedness; "
@@ -1108,7 +1108,7 @@ else:
         Name Speak: "Robbie", "Anyone with a life-threatening emergency should immediately call 911."
         Name Speak: "Robbie", "Thank you for helping test the Neon Covid-19 screener."
         Goto: promptLifeThreatening
-    if {covidLifeThreat} !IN {yesList[*]}:
+    If {covidLifeThreat} !IN {yesList[*]}:
             Goto: promptLifeThreatening
     Goto: B-call911
 
@@ -1119,13 +1119,13 @@ else:
 @promptContact
 Name Speak: "Robbie", "In the two weeks leading up to feeling sick {userRef1} had contact with someone who was diagnosed with COVID-19, or live in or recently visited a place where COVID-19 is spreading?"
 voice_input(covidContact)
-if {covidContact} IN {detailsList[*]}:
+If {covidContact} IN {detailsList[*]}:
     Name Speak: "Robbie", "It is important for record keeping to keep track of known contacts to people or places that expose them to Covid-19. Thank you for helping test the Neon Covid-19 screener."
     Goto: promptContact
-if {covidContact} IN {noList[*]}:
+If {covidContact} IN {noList[*]}:
     covidContact = {False}  
 else:
-    if {covidContact} !IN {yesList[*]}:
+    If {covidContact} !IN {yesList[*]}:
         Goto: promptContact
     covidContact = {True} 
 
@@ -1765,8 +1765,8 @@ Neon speak:
     "I'm thinking of a number between 1 and 10"
     "Guess what it is or say 'exit'"
 LOOP guess
-voice_input{user_guess}
-if {user_guess} in {numbers}:
+voice_input(user_guess)
+If {user_guess} IN {numbers}:
     if {user_guess} == {neon_num}:
         Neon speak: "You guessed it!"
         Exit
@@ -1789,7 +1789,7 @@ Exit</p>
 Variable: body = "Test email body\nnewline"
 Variable: emailAddr = profile(user.email)
 Variable: spoken
-if {emailAddr}:
+If {emailAddr}:
     Neon speak: "your email address is {emailAddr}"
 else:
     Neon speak: I don't know what your email address is
@@ -1813,7 +1813,7 @@ LOOP WW
         "Say S or Seattle for the weather in Seattle"
         "Say exit to exit"
     voice_input(location)
-    Case {location}:
+    Case (location):
         "A or Athens"
             Execute: "What is the weather in Athens"
             Neon speak: "about to repeat A"
@@ -1822,7 +1822,7 @@ LOOP WW
             Neon speak:
                 "say 10 day or 5 day forecast"
             voice_input(forecast)
-            Case {forecast}:
+            Case (forecast):
                 "10 day or 10"
                     Execute: "What is the 10 day forecast for Bombay"
                 "5 day or 5"
@@ -1955,15 +1955,15 @@ Variable: key_sub = "* [sorry] for {sorry_1}" "Please don't apologize about {sor
     "[quit]" "{final}",
     "*" "I'm not sure I understand you fully." "Please go on." " What do you mean by *?" "Do you feel strongly about discussing such things?"
 
-Name speak: Eliza: {initial}
+Name speak: Eliza, {initial}
 
 LOOP pre
-    voice_input {input}
+    voice_input(input)
     Set: user_speech = {input}
-    sub_values{input, input_sub}
-    sub_key{input, key_sub}
+    sub_values(input, input_sub)
+    sub_key(input, key_sub)
 
-    Name speak: Eliza: {input}
+    Name speak: Eliza, {input}
     if {user_speech} IN {quit}:
         Exit
 LOOP pre END
@@ -2033,460 +2033,6 @@ LOOP Q1 END
 @say_goodbye
 Neon Speak: "Goodbye"
 Exit</p>
-</div>
-<button type="button" class="collapsible">Guess My Word</button>
-<div class="content">
-  <p>Script: "Guess My Word"
-Language: en-us, female
-
-# Demonstration word game player from Neon AI
-# "Hi {userName}. Let's play the game guess my 7 word popular phrase. It very simple. I will choose a 7 word phrase and tell you one word. Then you guess a word, and if it is in the seven work phrase I will tell you its position or to guess again. Anytime you want you can guess the phrase, just say I guess  and I will tell you if you're right. If you want me to tell you what you've already guessed, just say recap or history. Say hint and I will tell you another word."
-# Later n word phrases; n letter words; subject specific popular phrase input from Wolfram, google; foreign language
-
-# Set up wait time for participant responses
-Variable: timeoutReturnLabel = AnnounceVersion
-Timeout: 30, TIMEOUT
-
-@AnnounceVersion
-
-Name Speak: Gamon,"Neon Word Game Demonstration Version 2020 08 06 22:30 </speak> Testing"
-# Announce version ("Testing" is displayed as text and is not spoken)
-
-Variable: sevenWordPhraseArray = "A DATE THAT WILL LIVE IN INFAMY",
-    "A DAY THAT WILL LIVE IN INFAMY",
-    "A WORD TO THE WISE IS ENOUGH",
-    "A WORD TO THE WISE IS SUFFICIENT",
-    "AND A MERRY OLD SOUL WAS HE",
-    "CAN'T SEE THE FOREST FOR THE TREES",
-    "CHILL OUT AND PLAY SOME VIDEO GAMES",
-    "COME OUT COME OUT WHEREVER YOU ARE",
-    "I SMELL THE BLOOD OF AN ENGLISHMAN",
-    "I'M LATE FOR A VERY IMPORTANT DATE",
-    "IF IT AIN'T BROKE DON'T FIX IT",
-    "IF YOU BUILD IT HE WILL COME",
-    "IF YOU BUILD IT THEY WILL COME",
-    "IT WAS A DARK AND STORMY NIGHT",
-    "IT'S ALL HUMBUG I TELL YOU HUMBUG",
-    "JACK AND JILL WENT UP THE HILL",
-    "JACK FELL DOWN AND BROKE HIS CROWN",
-    "LAUGH AND THE WORLD LAUGHS WITH YOU",
-    "LEAP TALL BUILDINGS IN A SINGLE BOUND",
-    "LIFE LIBERTY AND THE PURSUIT OF HAPPINESS",
-    "LIONS AND TIGERS AND BEARS OH MY",
-    "LITTLE BO PEEP HAS LOST HER SHEEP",
-    "LITTLE PIGS LITTLE PIGS LET ME IN",
-    "LIVE FROM NEW YORK IT'S SATURDAY NIGHT",
-    "NEITHER A BORROWER NOR A LENDER BE",
-    "NOT BY THE HAIR ON MY CHINNY-CHIN-CHIN",
-    "NOT BY THE HAIR OF MY CHINNY-CHIN-CHIN",
-    "NOW I LAY ME DOWN TO SLEEP",
-    "OH WHAT A TANGLED WEB WE WEAVE",
-    "ONE THING I CAN SAY FOR SURE",
-    "OLD MOTHER HUBBARD WENT TO THE CUPBOARD",
-    "OVER THE RIVER AND THROUGH THE WOODS",
-    "THE BEST-LAID SCHEMES OF MICE AND MEN",
-    "THE BEST-LAID PLANS OF MICE AND MEN",
-    "DISCRETION IS THE BETTER PART OF VALOR",
-    "THE BETTER PART OF VALOR IS DISCRETION",
-    "THE FACE THAT LAUNCHED A THOUSAND SHIPS",
-    "THE HABITS OF HIGHLY EFFECTIVE PEOPLE",
-    "THE STUFF THAT DREAMS ARE MADE FROM",
-    "THE STUFF THAT DREAMS ARE MADE OF",
-    "THE STUFF OF WHICH DREAMS ARE MADE",
-    "THE STUFF FROM WHICH DREAMS ARE MADE",
-    "THINGS THAT GO BUMP IN THE NIGHT",
-    "THIS IS THE SONG THAT NEVER ENDS
-    "TO ERR IS HUMAN TO FORGIVE DIVINE",
-    "TO FETCH HER POOR DOG A BONE",
-    "WE HOLD THESE TRUTHS TO BE SELF-EVIDENT",
-    "WE THE PEOPLE OF THE UNITED STATES",
-    "WHEN IN THE COURSE OF HUMAN EVENTS"
-
-Variable: usedPhrases
-Variable: chosenPhrase
-Variable: hintCount
-Variable: sayNext
-Variable: foundWords
-Variable: chosenPhraseWords
-Variable: chosenPhraseWordsByLen
-Variable: iWord
-Variable: blankCount
-Variable: userInput
-Variable: userInputWords
-Variable: userInputWordsLen
-
-usedPhrases[*] = ""
-
-Variable: True = 1		
-Variable: False = 0		
-Variable: exitList = "exit", "cancel", "never mind"
-Variable: noList
-Variable: yesList
-Variable: alertsPhraseList
-Variable: inProgressList
-Variable: heyList
-Variable: askPrompt
-Variable: returnLabel
-Variable: heardSilence
-Variable: falseAlarmCount
-Variable: askReturnValue
-Variable: userName
-Variable: moreAppInfo
-Variable: customizeSettings
-Variable: customizeLanguage
-Variable: customizeProsody
-Variable: photoTime
-Variable: enableNeonApps
-
-@StartUp
-
-# Initialize
-
-# exitList = "exit", "cancel", "never mind"
-noList = "no", "not now", "never mind", "nope", "n" 
-yesList = "yes", "yup", "y"
-
-alertsPhraseList = "help", "I need help", "help me", "emergency", "this is an emergency", "i need a doctor", "i need a doctor", "i need a doctor", "i need a doctor", "i need a doctor", "i need a nurse", "i need aid", "i need a caregiver", "i need assistance", "i fell", "i can't get up", "fire"
-
-inProgressList = "what time is it", "Remind me to", "Play", "Record this", "Send an email", "Send a text"
-
-heyList = "hey Gamon", "Gamon are you there", "is anybody listening", "what time is it"
-
-speechGenderList = "female", "male"
-speechRateList = "medium", "fast", "slow"
-speechAccentList = "American", "British", "Australian"
-
-askPrompt = ""
-returnLabel = "" 
-heardSilence = ""
-falseAlarmCount = 0
-askReturnValue = ""
-userName = ""
-moreAppInfo = ""
-customizeSettings = ""
-customizeLanguage = ""
-customProsody = "rate='medium'"
-photoTime = ""
-enableNeonApps = {True}
-
-# Ask to install assistant
-
-@PromptInstallAssistant
-
-returnLabel = InstallAssistant
-timeoutReturnLabel = PromptInstallAssistant
-Name Speak: Gamon,"Hi, I'm Gamon. I'm a demonstration word game player from Neon AI. Thank you for helping test my conversational skills."
-askPrompt = "Please tell me your name, or you can say cancel to exit."
-GOTO : ASK
-
-@InstallAssistant
-
-userName = {askReturnValue}
-
-Name Speak: Gamon,"Hi {userName}. I am glad you chose to play word games with me."
-
-## Offer additional information
-
-@ReAskMoreInfo
-
-Name Speak: Gamon,"Before starting the Neon Word Game, would you like more information on the Neon conversational AI?"
-timeoutReturnLabel = ReAskMoreInfo
-voice_input(moreAppInfo)
-if {moreAppInfo} IN {noList[*]}:
-    GOTO : PromptCustomize
-
-Name Speak: Gamon,"Hi {userName}. I'm Gamon the word games playing assistant from Neon AI. I am an artificial intelligence personal assistant, I'm augmented with Neon Gecko open source code and CPI Corp patented technology."
-
-# Customize
-
-@PromptCustomize
-
-## Offer customization of settings for administrator, voice and system settings
-## Set up PA voice: name, gender, accent, pitch, speed, [Later: language, diction, empathy]
-## Set up system settings: timeoutSeconds (wait time for user input)
-
-customLanguage = ""
-enableNeonApps = {True}		
-
-Name Speak: Gamon,"Would you like to customize the Neon Word Game settings to change my voice?"
-# Later: Provide example of new Language/Prosody and offer reset
-
-timeoutReturnLabel = PromptCustomize
-voice_input(customizeSettings)
-if {customizeSettings} !IN {yesList[*]}:
-    GOTO : BeginAssistant
-
-Name Speak: Gamon,"Hi {userName}. You can customize my voice for the Neon demonstration conversational game player. You can say female, male, normal, fast, slow, American, British or Australian, or say no change. </speak>"
-
-@ReAskCustomize
-
-# Name Speak: Gamon,"Would you like to change the voice of the Neon conversational Word Game Assistant?"
-
-timeoutReturnLabel = ReAskCustomize
-voice_input(customizeSettings)
-if {customizeSettings} == "":
-    GOTO : PromptCustomize
-if {customizeSettings} CONTAINS "no change":
-    GOTO : BeginAssistant
-if {customizeSettings} IN {noList[*]}:
-    GOTO : BeginAssistant
-
-# Variable: britWords = british, gb, uk
-if {customizeSettings} CONTAINS british, gb, uk:
-    customLanguage = "'en-GB'"
-else
-    if {customizeSettings} CONTAINS "Australian, AU, aussie":
-        customLanguage = "en-AU"
-    else
-        customLanguage = "en-us"
-
-if {customizeSettings} CONTAINS "female":
-    customLanguage = "{customLanguage} female"
-else
-    customLanguage = "{customLanguage} male"
-
-Language: {customLanguage}
-
-if {customizeSettings} CONTAINS "fast":
-    customProsody = "rate='fast'"
-else
-    if {customizeSettings} CONTAINS "slow":
-        customProsody = "rate='slow'"
-    else
-        customProsody = "rate='medium'"
-
-@ReAskApps
-
-Name Speak: Gamon,"Would you like to enable more Neon applications including playing music, playing other games, taking notes, setting reminders, making calculation, requesting general information or changing my voice?"		
-
-timeoutReturnLabel = ReAskApps		
-voice_input(customizeSettings)
-if {customizeSettings} == "":		
-    GOTO : ReAskApps		
-
-if {customizeSettings} IN {noList[*]}:		
-    enableNeonApps = {False}		
-    GOTO : BeginAssistant		
-
-@BeginAssistant
-
-timeoutReturnLabel = WaitForAlertPhrase
-Name Speak: Gamon,"<prosody {customProsody}> Your demonstration word game assistant has signed in. If you want to know if I am listening, you can say, hey Gamon , or, Gamon are you there. </prosody>"
-
-Name Speak: Gamon,"Hi {userName}. Let's play the game guess my 7 word popular phrase. It very simple. I will choose a 7 word phrase and tell you one word. Then you guess a word, and if it is in the seven work phrase I will tell you its position or to guess again. Anytime you want you can guess the phrase, just say I guess  and I will tell you if you're right. If you want me to tell you what you've already guessed, just say recap or history. Say hint and I will tell you another word."
-
-### SET UP GAME
-
-# Choose New Phrase
-@ChooseNewPhrase
-chosenPhrase = random(sevenWordPhraseArray)
-# Check if used before
-if usedPhrases CONTAINS chosenPhrase
-    GOTO : ChooseNewPhrase
-
-# Add New Phrase to list of phrased used
-usedPhrases = chosenPhrase
-
-hintCount = 0
-sayNext = ""
-foundWords[*] = ""
-
-# Build word row for the sevenWordPhrase
-Python: chosenPhraseWords = chosenPhrase.split()
-# Build word row by word length [0]..[6]
-Python: chosenPhraseWordsByLen = chosenPhraseWords.sort(key=len)
-
-@NextHint
-
-# Give first or next hint
-if foundWords CONTAINS chosenPhraseWordsByLen[hintCount] :
-    Python: hintCount++
-    GOTO : NextHint
-Name Speak: Gamon,"Hint {hintCount}, the {sayNext} longest word is" {chosenPhraseWordsByLen[hintCount]}
-foundWords = {chosenPhraseWordsByLen[hintCount]}
-Python: hintCount++
-sayNext = "next"
-
-@GuessNextWord
-
-Name Speak: Gamon,"Here's where we're at"
-iWord = 0
-blankCount = 0
-LOOP SayFoundWords
-    if chosenPhraseWord[iWord] in foundWords :
-        Name Speak: Gamon,chosenPraseWord[i]
-    else
-        Name Speak: Gamon,"blank"
-        Python: blankCount++
-    Python: iWord++
-LOOP SayFoundWords UNTIL iWord >= 7
-
-if blankCount == 0
-    Name Speak: Gamon,"Game Over! Thank you {userName} for playing with me"
-    Name Speak: Gamon,"Let's play again"
-    GOTO : ChooseNewPhrase
-
-
-### Wait for Gamon/Emergency/Neon activiation alert phrase
-
-@WaitForAlertPhrase
-
-askPrompt = "Say I guess followed by a word, or I guess followed a phrase, or hint or recap or guessed words or exit"
-timeoutReturnLabel = WaitForAlertPhrase
-returnLabel = GotUserPhrase
-Goto : ASK
-
-@GotUserPhrase
-
-userInput = askReturnValue
-if {userInput} == "" :
-    GOTO : ReAskGuess
-
-if {userInput} STARTSWITH "hint" :
-    GOTO : NextHint
-
-if {userInput} IN "guessed words", "recap", "history" :
-    Name Speak: Gamon, "Here are your mis guessed words: {guessedWords}"
-    GOTO : GuessNextWord
-
-if {userInput} STARTSWITH "I guess" :
-    Python: userInputWords = userInput.split()
-    Python: userInputWordsLen = len(userInputWords) 
-    Python: userInputWords = userInput.split()
-
-    if userInputWordsLen == 3 :
-        guessedWord = userInputWords[2]
-        if chosenPhraseWords[*] CONTAINS guessedWord :
-            if guessedWord !IN foundWords[*] :
-                foundWords = guessedWord
-            else
-                if guessedWord !IN misGuessedWords[*] :
-                    misGuessedWords = guessedWord
-            GOTO : GuessNextWord
-
-    if userInputWordsLen != 9 :
-        # wrong number of words
-        Name Speak: Gamon,"I'm sorry {userName} I heard the wrong number of words."
-        Name Speak: Gamon,"I heard {userInputWords}"
-        Name Speak: Gamon,"Please try again."
-        GOTO : GuessNextWord
-
-    if userInputWords[2:] != chosenPhrase
-        Name Speak: Gamon,"I heard {userInputWords}"
-        Name Speak: Gamon,"I'm sorry {userName} that's not the popular phrase I'm thinking of."
-        Name Speak: Gamon,"Please try again."
-        GOTO : GuessNextWord
-
-    Name Speak: Gamon, "Yay {userName} userInputWords[2:] is correct."
-    Name Speak: Gamon,"Game Over! Thank you {userName} for playing with me"
-    Name Speak: Gamon,"Let's play again"
-    GOTO : ChooseNewPhrase
-
-
-### SYSTEM ALERT PHRASES
-
-## Did user ask for "help" 
-if {askReturnValue} !IN {alertsPhraseList[*]}:
-    ## Not an emergency alert, check for secondary (in progress)
-    if {enableNeonApps}:
-        ## if {askReturnValue} CONTAINS {inProgressList[*]}:
-        if {askReturnValue} STARTSWITH {inProgressList[*]}:
-            Case: 
-                # inProgressList = "what time is it", "Remind me to", "Play", "Record this", "Send an email", "Send a text"
-
-            Name Speak: Gamon,"I'm sorry {userName} that is under construction."
-    ## Not a Gamon/Alert/Neon activation phrase, listen again
-    GOTO : WaitForAlertPhrase
-
-# Possible EMERGENCY
-
-Name Speak: Gamon,"The Emergency Assistant heard an emergency alert. I heard {askReturnValue}"
-Reconvey : askReturnValue
-Name Speak: Gamon,"</speak>PA 6 did reconvey"
-
-@PromptConfirmHelp
-
-askPrompt = "Please say just kidding if this is not an emergency"
-returnLabel = ConfirmHelp
-GOTO : ASK
-@ConfirmHelp
-
-## Did user REALLY ask for "help"? 
-if {askReturnValue} == "":
-    Name Speak: Gamon,"The Emergency Assistant heard nothing. I heard"
-    Reconvey : askReturnValue
-    Name Speak: Gamon,"</speak>PA 8 did reconvey of nothing heard"
-
-    ## PA heard nothing after emergency request .. if second time then this is an emergency
-    if {heardSilence} == {True} :
-        GOTO : Emergency
-    heardSilence = {True}
-    ## Increase volume and speak slowly
-    Name Speak: Gamon,"<prosody volume='+100%' rate='slow'>{userName}! I need to hear from you! Is this an emergency?</prosody>"
-    GOTO : PromptConfirmHelp
-if {askReturnValue} CONTAINS "just kidding", "never mind", "not an emergency":
-    Name Speak: Gamon,"The Emergency Assistant heard you say this is not an emergency. I heard"
-    Reconvey : askReturnValue
-    ### Name Speak: Gamon,"</speak>Did reconvey of jk"
-
-    ## User said jk so restart listening
-    Name Speak: Gamon,"Please say help again if this is an emergency."
-    Python: falseAlarmCount = {falseAlarmCount} + 1
-    GOTO : WaitForAlertPhrase
-
-# EMERGENCY
-
-@Emergency
-
-Name Speak: Gamon,"<prosody volume='+100%' rate='normal'>{userName}! Needs! Help! This is an EMERGENCY</prosody>"
-
-Name Speak: Gamon,"The Emergency Assistant would now send an emergency alert, sound an alarm, keep engaged with the user, and send updated alerts to the caregiver."
-
-Name Speak: Gamon,"Gamon test completed. Say start again to start again?"
-voice_input{askReturnValue}
-if {askReturnValue} == "start again":
-    Name Speak: Gamon,"</speak> Gamon is restarting. Thanks again."
-    GOTO : StartUp
-
-Name Speak: Gamon,"Gamon exiting. Thanks again for helping test my skills."
-exit
-
-# ========== Subroutines
-
-@ASK
-# The ASK subroutine speaks the askPrompt and waits for a response. If the response is a command to Gamon to perform an action, then the request is effected and Gamon continues waiting for a response, otherwise, the response is returned to the caller in the askReturnValue. 
-# Input parameters: askPrompt, returnLabel and timeOutReturnLabel
-# Result parameter: askReturnValue
-
-### Name Speak: Gamon,"Ask 1 Starting"
-if {askPrompt}:
-    Name Speak: Gamon," {askPrompt} "
-### Name Speak: Gamon,"Ask 2 Starting ask subroutine"
-voice_input(askReturnValue)
-### Name Speak: Gamon,"Ask 3 got input"
-if {askReturnValue} IN {exitList[*]}:
-    Name Speak: Gamon,"Say yes to confirm exiting Gamon, the Neon Word Game Assistant"
-    voice_input(askReturnValue)
-    if {askReturnValue} IN {yesList[*]}:
-        Name Speak: Gamon,"Gamon , the Neon Word Game Assistant, signing off"
-        exit
-    else
-        GOTO : ASK
-### Name Speak: Gamon,"Ask 4 not cancel command {askReturnValue}"
-if {askReturnValue} IN {heyList[*]}:
-    Name Speak: Gamon,"<prosody {customProsody}> {userName}, Gamon the Word Game Assistant demo here. I'm listening all the time but I don't <phoneme alphabet= "x-sampa" ph= "rikord">record</phoneme> everything you say. I only make recordings of calls for help or if you say emergency. </prosody>"
-# Note - Disambiguation for the pronunciations of "record": <phoneme alphabet= "x-sampa" ph= "rikord">record</phoneme> Verb as in "I record everything you say" vs. Noun as in "Make a record of the conversation".
-    Name Speak: Gamon,"The time is"
-    Execute : "Neon what time is it"
-    if {falseAlarmCount} != 0:
-        Name Speak: Gamon,"The false alarm count is {falseAlarmCount}!"
-    GOTO : ASK
-### Name Speak: Gamon,"Ask 5 About to return to {returnLabel}"
-GOTO: {returnLabel}
-
-
-@TIMEOUT
-GOTO: {timeoutReturnLabel}</p>
 </div>
 <button type="button" class="collapsible">Hello World Input</button>
 <div class="content">
@@ -2785,7 +2331,7 @@ Name Speak: Pat, "Hi {userName}. I am glad you chose to install the Neon Patient
 
 Name Speak: Pat, "Before starting the Patient Assistant would you like more information on the Neon conversational patient assistance application?"
 timeoutReturnLabel = ReAskMoreInfo
-voice_input{moreAppInfo}
+voice_input(moreAppInfo)
 if {moreAppInfo} IN {noList[*]}:
     Goto: PromptCustomize
 
@@ -2808,7 +2354,7 @@ Name Speak: Pat, "Would you like to customize the Patient Assistant settings to 
 # Name Speak: Pat, "Would you like to customize the Patient Assistant settings for administrator, voice and PAT system settings?"
 
 timeoutReturnLabel = PromptCustomize
-voice_input{customizeSettings}
+voice_input(customizeSettings)
 if {customizeSettings} !IN {yesList[*]}:
     Goto: BeginAssistant
 
@@ -2819,7 +2365,7 @@ Name Speak: Pat, "Hi {userName}. You can customize the voice for the Neon demons
 # Name Speak: Pat, "Would you like to change the voice of the Neon conversational patient assistance application?"
 
 timeoutReturnLabel = ReAskCustomize
-voice_input{customizeSettings}
+voice_input(customizeSettings)
 if {customizeSettings} == "":
     Goto: PromptCustomize
 if {customizeSettings} CONTAINS "no change":
@@ -2866,7 +2412,7 @@ else
 Name Speak: Pat, "Would you like to enable more Neon patient assistance applications including playing music, playing games, reminders for medicine, hydration, meals and sleep, requests to record symptoms or other stats,  and to request general information or assistance with math?"
 
 timeoutReturnLabel = ReAskApps
-voice_input{customizeSettings}
+voice_input(customizeSettings)
 if {customizeSettings} == "":
     Goto: ReAskApps
 
@@ -2982,7 +2528,7 @@ Name Speak: Pat, "<prosody volume='+100%' rate='normal'>{userName}! Needs! Help!
 Name Speak: Pat, "Pat the Patient Assistant would now send an emergency alert, sound an alarm, keep engaged with the patient, and send updated alerts to the caregiver."
 
 Name Speak: Pat, "Pat test completed. Say start again to start again?"
-voice_input{askReturnValue}
+voice_input(askReturnValue)
 if {askReturnValue} == "start again":
     Name Speak: Pat, "</speak>Pat is restarting. Thanks again."
     Goto: StartUp
@@ -3001,11 +2547,11 @@ exit
 if {askPrompt}:
     Name Speak: Pat, " {askPrompt} "
 ### Name Speak: Pat, "Ask 2 Starting ask subroutine"
-voice_input {askReturnValue}
+voice_input(askReturnValue)
 ### Name Speak: Pat, "Ask 3 got input"
 if {askReturnValue} IN {exitList[*]}:
     Name Speak: Pat, "Say yes to confirm exiting Pat, the Neon AI Patient Assistant"
-    voice_input{askReturnValue}
+    voice_input(askReturnValue)
     if {askReturnValue} IN {yesList[*]}:
         Name Speak: Pat, "Pat, the Neon AI Patient Assistant, signing off"
         exit
@@ -3319,8 +2865,8 @@ Goto : ASK
 @InstallAssistant
 
 userName = askInput
-Name Speak : Patty : "Hi {userName}. I am glad you chose to test subroutines."
-Name Speak : Patty : "Patty Exiting"
+Name Speak: Patty, "Hi {userName}. I am glad you chose to test subroutines."
+Name Speak: Patty, "Patty Exiting"
 exit
 
 ##
@@ -3328,7 +2874,7 @@ exit
 @ASK
 if {askPrompt} != ""
     Name Speak : Patty, "{askPrompt}"
-voice_input {askInput}
+voice_input(askInput)
 if {askInput} IN {exitList[*]}:
     Name Speak : Patty, "Say yes to confirm exiting Patty"
     voice_input(askInput)
@@ -3359,117 +2905,6 @@ Neon speak:
 Execute: "av play closest(chosen,options)"
 Exit
 </p>
-</div>
-<button type="button" class="collapsible">Test Eliza</button>
-<div class="content">
-  <p>Script: Test Eliza
-Language: en-GB, female
-
-Variable: input
-Variable: split_input
-
-# Static Strings
-Variable: initial = It's nice to meet you. How are you today?
-Variable: final = Goodbye. Thank you for talking to me.
-Variable: quit = bye, goodbye, quit
-
-# Substitutions
-Variable: input_sub = dont don't,
-    cant can't,
-    wont won't,
-    recollect remember,
-    dreamt dreamed,
-    dreams dream,
-    maybe perhaps,
-    when what,
-    certainly yes,
-    machine computer,
-    computers computer,
-    were was,
-    "you're" "you are",
-    "i'm" "i am",
-    same alike
-
-# Synonyms
-Variable: belief = belief, feel, think, believe, wish
-Variable: family = family, mother, mom, father, dad, sister, brother, wife, children, child
-Variable: desire = desire, want, need, wish
-Variable: sad = sad, unhappy, depressed, sick
-Variable: happy = happy, elated, glad, better
-Variable: cannot = cannot, can't
-Variable: everyone = everyone, everybody, nobody, noone
-Variable: people = people, they, others, adults, children, teenagers
-Variable: be = be, am, is, are, was
-Variable: sorry = sorry, i apologize
-Variable: language = deutsch, francais, italiano, espanol
-
-# Input to response matching
-Variable: key_sub = "{sorry_0} [sorry] for {Vsorry}" "Please don't apologize about {Vsorry}" "No need to apologize about {Vsorry[*]}" "I've told you that apologies are not required." "Vsorry's are {Vsorry[*]}",
-    "i remember {Viremember}" "Do you often think of {Viremember}?" "Does thinking of {Viremember} bring anything else to mind?" "What else do you recollect?" "Why do you recollect {Viremember} just now?" "What in the present situation reminds you of {Viremember}?" "Viremember's are {Viremember[*]}",
-    "do you remember {Vyouremember}" "Did you think I would forget {Vyouremember}?" "Why do you think I should recall {Vyouremember} now?" "What about {Vyouremember}? "You mentioned {Vyouremember}?" "Vyouremember's are {Vyouremember[*]}",
-    "if {Vif}" "Do you think its likely that {Vif}?" "Do you wish that {Vif}?" "What do you know about {Vif}?" "Really, if {Vif}?" "Vif's are {Vif[*]}",
-    "{Vdreamed} dreamed {Vdreamed2}" "Really, {Vdreamed2}?" "Have you ever fantasized {Vdreamed2} while you were awake?" "Have you ever dreamed {Vdreamed2} before?" "Vdreamed2's are {Vdreamed2[*]}",
-    "dream" "What does that dream suggest to you?" "Do you dream often?" "What persons appear in your dreams? "Do you believe that dreams have something to do with your problems?",
-    "perhaps" "You don't seem quite certain." "Why the uncertain tone?" "Can't you be more positive?" "You aren't sure?" "Don't you know?",
-    "name" "I am not interested in names." "I've told you before, I don't care about names -- please continue.",
-    "{Vlanguage}[language]{Vlanguage2}" "I speak only English" "I do not speak {[language]}",
-    "hello" "How do you do. Please state your problem." "Hi. What seems to be your problem?",
-    "how are you" "We were discussing you -- not me.",
-    "are you {Vareyou}" "Why are you interested in whether I am {Vareyou} or not?" "Would you prefer if I weren't {Vareyou}?" "Perhaps I am {Vareyou} in your fantasies." "Do you sometimes think I am {Vareyou}?" "Vareyou's are {Vareyou[*]}",
-    "computer" "Do computers worry you?" "Why do you mention computers?" "What do you think machines have to do with your problem?" "Don't you think computers can help people?" "What about machines worries you?" "What do you think about machines?",
-    "am i {Vami}" "Do you believe you are {Vami}?" "Would you want to be {Vami}?" "Do you wish I would tell you you are {Vami}?" "What would it mean if you were {Vami}?" "Vami's are {Vami[*]}",
-    "[people] are {Vpeople}" "Did you think they might not be {Vpeople}?" "Would you like it if they were not {Vpeople}?" "What if they were not {Vpeople}?" "Possibly they are {Vpeople}." "Vpeople's are {Vpeople[*]}",
-    "was i {Vwasi}" "What if you were {Vwasi}?" "Do you think you were {Vwasi}?" "Were you {Vwasi}?" "What would it mean if you were {Vwasi}?" "What does {Vwasi} suggest to you ?" "Vwasi's are {Vwasi[*]}",
-    "i was {Viwas}" "Were you really?" "Why do you tell me you were {Viwas} now?" "Perhaps I already know you were {Viwas}." "Viwas's are {Viwas[*]}",
-    "was you {Vwereyou}" "Would you like to believe I was {Vwereyou}?" "What suggests that I was {Vwereyou}?" "What do you think?" "Perhaps I was {Vwereyou}." "What if I had been {Vwereyou}?" "Vwereyou's are {Vwereyou[*]}",
-    "i am {Vsad} [sad]" "I am sorry to hear that you are {[sad]}." "Do you think that coming here will help you not to be {[sad]}?" "I'm sure it's not pleasant to be {[sad]}." "Can you explain what made you {[sad]}?",
-    "i am {Vhappy} [happy]" "How have I helped you to be {[happy]}?" "Has your treatment made you {[happy]}?" "What makes you {[happy]} just now?" "Can you explain why you are suddenly {[happy]}?",
-    "i [belief] {Vbelief1} i {Vbelief2}" "Do you really think so?" "But you are not sure you {Vbelief2}." "Do you really doubt you {Vbelief2}?" "Vbelief2's are {Vbelief2[*]}",
-    "i am {Viam}" "Is it because you are {Viam} that you came to me?" "How long have you been {Viam}?" "Do you believe it is normal to be {Viam}?" "Do you enjoy being {Viam}?" "Viam's are {Viam[*]}",
-    "i [cannot] {Vicannot}" "Why do you think that you can't {Vicannot}?" "Have you tried?" "Perhaps you could {Vicannot} now." "Do you really want to be able to {Vicannot}?" "Vicannot's are {Vicannot[*]}",
-    "i don't {Vidont}" "Don't you really {Vidont}?" "Why don't you {Vidont}?" "Do you wish to be able to {Vidont}?" "Does that trouble you?" "Vidont's are {Vidont[*]}",
-    "do i feel {Vdoifeel}" "Tell me more about such feelings." "Do you often feel {Vdoifeel}?" "Do you enjoy feeling {Vdoifeel}?" "Of what does feeling {Vdoifeel} remind you?" "Vdoifeel's are {Vdoifeel[*]}",
-    "i {Viyou} you" "Perhaps in your fantasies we {Viyou} each other." "Do you wish to {Viyou} me?" "You seem to need to {Viyou} me." "Do you {Viyou} anyone else?" "Viyou's are {Viyou[*]}",
-    "you are {Vyouare}" "What makes you think I am {Vyouare}?" "Does it please you to believe I am {Vyouare}?" "Do you sometimes wish you were {Vyouare}?" "Perhaps you would like to be {Vyouare}." "Vyouare's are {Vyouare[*]}",
-    "you {Vyoume} me" "Why do you think I {Vyoume} you?" "You like to think I {Vyoume} you, don't you ?" "What makes you think I {Vyoume} you?" "Really, I {Vyoume} you?" "Do you wish to believe I {Vyoume} you?" "Suppose I did {Vyoume} you -- what would that mean?" "Does someone else believe I {Vyoume} you?" "Vyoume's are {Vyoume[*]}",
-    "yes" "You seem to be quite positive." "You are sure." "I see." "I understand.",
-    "no" "Are you saying no just to be negative?" "You are being a bit negative." "Why not?" "Why 'no'?",
-    "my {Vmyfamily1} [family] {Vmyfamily2}" "Tell me more about your {[family]}." "Who else in your family {Vmyfamily2}?" "Your {[family]}?" "What else comes to mind when you think of your {[family]}?" "Vmyfamily2's are {Vmyfamily2[*]}",
-    "i [desire] {Vdesire}" "What would it mean to you if you got {Vdesire}?" "Why do you want {Vdesire}?" "Suppose you got {Vdesire} soon?" "What if you never got {Vdesire}?" "What would getting {Vdesire} mean to you?" "What does wanting {Vdesire} have to do with this discussion?" "Vdesire's are {Vdesire[*]}",
-    "what" "Why do you ask?" "Does that question interest you?" "What is it you really wanted to know?" "Are such questions much on your mind?" "What answer would please you most?" "What do you think?" "What comes to mind when you ask that?" "Have you asked such questions before?" "Have you asked anyone else?",
-    "because" "Is that the real reason?" "Don't any other reasons come to mind?" "Does that reason seem to explain anything else?" "What other reasons might there be?",
-    "why don't you {Vwhydontyou}" "Do you believe I don't {Vwhydontyou}?" "Perhaps I will {Vwhydontyou} in good time." "Should you {Vwhydontyou} yourself?" "You want me to {Vwhydontyou}?" "Vwhydontyou's are {Vwhydontyou[*]}",
-    "why can't i {Vwhycanti}" "Do you think you should be able to {Vwhycanti}?" "Do you want to be able to {Vwhycanti}?" "Do you believe this will help you to {Vwhycanti}?" "Have you any idea why you can't {Vwhycanti}?" "Vwhycanti's are {Vwhycanti[*]}",
-    "why" "Why do you ask?" "Does that question interest you?" "What is it you really wanted to know?" "Are such questions much on your mind?" "What answer would please you most?" "What do you think?" "What comes to mind when you ask that?" "Have you asked such questions before?" "Have you asked anyone else?",
-    "[everyone] {Veveryone}" "Really, {[everyone]}?" "Surely not {[everyone]} {Veveryone}." "Can you think of anyone in particular ?" "Who, for example?" "Are you thinking of a very special person?" "Who, may I ask?" "Someone special perhaps?" "You have a particular person in mind, don't you?" "Who do you think you're talking about?" "Veveryone's are {Veveryone[*]}",
-    "always" "Can you think of a specific example?" "When?" "What incident are you thinking of?" "Really, always?",
-    "alike" "In what way?" "What resemblance do you see?" "What does that similarity suggest to you?" "What other connections do you see?" "What do you suppose that resemblance means?" "What is the connection, do you suppose?" "Could here really be some connection?" "How?",
-    "[be] like" "In what way?" "What resemblance do you see?" "What does that similarity suggest to you?" "What other connections do you see?" "What do you suppose that resemblance means?" "What is the connection, do you suppose?" "Could here really be some connection?" "How?",
-    "can you {Vcanyou}" "You believe I can {Vcanyou} don't you?" "You want me to be able to {Vcanyou}." "Perhaps you would like to be able to {Vcanyou} yourself." "Vcanyou's are {Vcanyou[*]}",
-    "can i {Vcani}" "Whether or not you can {Vcani} depends on you more than me." "Do you want to be able to {Vcani}?" "Perhaps you don't want to {Vcani}." "Vcani's are {Vcani[*]}",
-    "your {Vyour}" "Why are you concerned over my {Vyour}?" "What about your own {Vyour}?" "Are you worried about someone else's {Vyour}?" "Really, my {Vyour}?" "Vyour's are {Vyour[*]}",
-    "my {Vmy}" "Your {Vmy}?" "Why do you say your {Vmy}?" "Does that suggest anything else which belongs to you?" "Is it important that your {Vmy}?" "Vmy's are {Vmy[*]}",
-    "you {Vyou}" "We are discussing you -- not me." "Oh. I {Vyou}?" "You're not really talking about me -- are you?" "What are your feelings now?" "Vyou's are {Vyou[*]}",
-    "i {Vi}" "You say {Vi}?" "Can you elaborate on that?" "Do you say {Vi} for some special reason?" "That's quite interesting." "Vi's are {Vi[*]}",
-    "thank you" "you are welcome" "don't mention it" "no problem",
-    "[quit]" "{final}",
-    "{Vx}" "I'm not sure I understand you fully." "Please go on." " What do you mean by {Vx}?" "Do you feel strongly about discussing such things?" "Vx's are {Vx[*]}"
-
-Name speak: Eliza, {initial}
-
-LOOP pre
-    voice_input(input)
-    Set: user_speech = {input}
-    sub_values(input, input_sub)
-    sub_key(input, key_sub)
-
-    Name speak: Eliza, {input}
-    if {user_speech} in {quit}:
-        Exit
-LOOP pre END
-
-Neon speak: {final}
-Exit</p>
 </div>
 <button type="button" class="collapsible">Test Email</button>
 <div class="content">
@@ -3616,301 +3051,6 @@ Case: {test_set}
 
 Exit</p>
 </div>
-<button type="button" class="collapsible">Test Pat</button>
-<div class="content">
-  <p>Script: "Test Pat"
-Language: "en-us male"
-
-# Set up wait time for patient responses
-Variable: timeoutReturnLabel = AnnounceVersion
-Timeout: 30 TIMEOUT
-
-# Announce version ("Testing" is displayed as text and is not spoken)
-
-@AnnounceVersion
-
-Name Speak : Pat : "Neon Patient Assistant Application Demonstration Version 2020 07 09 18:22 again </speak> Testing"
-
-Variable: True = 1		
-Variable: False = 0		
-Variable: exitList = "exit", "cancel", "never mind"
-Variable: noList
-Variable: yesList
-Variable: alertsPhraseList
-Variable: inProgressList
-Variable: heyPatList
-Variable: askPrompt
-Variable: returnLabel
-Variable: heardSilence
-Variable: falseAlarmCount
-Variable: askReturnValue = ""
-Variable: userName
-Variable: moreAppInfo
-Variable: customizeSettings
-Variable: customizeLanguage
-Variable: customizeProsody
-Variable: photoTime
-Variable: enableNeonApps
-
-@StartUp
-
-# Initialize
-
-# exitList = "exit", "cancel", "never mind"
-noList = "no", "not now", "never mind", "nope", "n" 
-yesList =  "yes", "yup", "y"
-
-alertsPhraseList =  "help", "I need help", "help me", "emergency", "this is an emergency", "i need a doctor", "i need a doctor", "i need a doctor", "i need a doctor", "i need a doctor", "i need a nurse", "i need aid", "i need a caregiver", "i need assistance", "i fell", "i can't get up", "fire"
-
-inProgressList = "hey pat", "pat are you there", "is anybody listening", "what time is it", "Remind me to", "Play", "Email", "Record"
-
-heyPatList = "hey pat", "pat are you there", "is anybody listening", "what time is it"
-
-speechGenderList = "female", "male"
-speechRateList = "medium", "fast", "slow"
-speechAccentList = "American", "British" or "Australian"
-
-askPrompt = ""
-returnLabel = "" 
-heardSilence = ""
-falseAlarmCount = 0
-askReturnValue = ""
-userName = ""
-moreAppInfo = ""
-customizeSettings = ""
-customizeLanguage = ""
-customProsody = "rate='medium'"
-photoTime = ""
-enableNeonApps = {True}
-
-# Ask to install assistant
-
-@PromptInstallAssistant
-
-returnLabel = InstallAssistant
-timeoutReturnLabel = PromptInstallAssistant
-Name Speak : Pat : "Hi, I'm Pat. I'm a demonstration patient assistant from Neon AI. Thank you for helping test my conversational skills."
-askPrompt = "Please tell me your name, or you can say cancel to exit."
-Goto : ASK
-
-@InstallAssistant
-
-userName = {askReturnValue}
-
-Name Speak : Pat : "Hi {userName}. I am glad you chose to install the Neon Patient Assistant Application."
-
-## Offer additional information
-
-@ReAskMoreInfo
-
-Name Speak : Pat : "Before starting the Patient Assistant, would you like more information on the Neon conversational patient assistance application?"
-timeoutReturnLabel = ReAskMoreInfo
-voice_input{moreAppInfo}
-if {moreAppInfo} IN {noList[*]}:
-    Goto: PromptCustomize
-
-Name Speak : Pat : "Hi {userName}. I'm Pat the demonstration conversational patient assistant from Neon AI. I am an artificial intelligence personal assistant, I'm augmented with Neon Gecko open source code and CPI Corp patented technology. Neon AI makes the Patient Assistant application to enable patients to alert their caregivers to emergencies and other needs, and to get simple information. As your automated patient assistant I listen for calls for help and send alerts to the patient care administrator. For example, you can say help, or I fell. Another thing you can say is what time is it .. </speak> In the future you will be able to play your favorite music, turn the lights on or off, and even ask to send a text message .. And if you don't want to call me Pat, someday you will be able to change my name."
-
-# Customize
-
-@PromptCustomize
-
-## Offer customization of settings for administrator, voice and system settings
-## Set up PA voice: name, gender, accent, pitch, speed, [Later: language, diction, empathy]
-## Set up system settings: timeoutSeconds (wait time for user input)
-## Set up administrator (password, email, name, phone, [Later: staff names, secondary contacts] ..)
-## Set up nurse (password, email, name, phone, [Later: staff names, secondary contacts] ..)
-
-customLanguage = ""
-enableNeonApps = {True}		
-
-Name Speak : Pat : "Would you like to customize the Patient Assistant settings to disable non-emergency Neon AI patient applications, or to change my voice?"
-# Name Speak : Pat : "Would you like to customize the Patient Assistant settings for administrator, voice and PAT system settings?"
-
-timeoutReturnLabel = PromptCustomize
-voice_input{customizeSettings}
-if {customizeSettings} !IN {yesList[*]}:
-    Goto: BeginAssistant
-
-Name Speak : Pat : "Hi {userName}. You can customize the voice for the Neon demonstration conversational patient assistant. You can say no change, or say female, male, normal, fast, slow, American, British or Australian. </speak> In the future you will be able to set up information for the administrator, staff members and the patient, and change my name and other PAT system settings."
-
-@ReAskCustomize
-
-# Name Speak : Pat : "Would you like to change the voice of the Neon conversational patient assistance application?"
-
-timeoutReturnLabel = ReAskCustomize
-voice_input{customizeSettings}
-if {customizeSettings} == "":
-    Goto: PromptCustomize
-if {customizeSettings} CONTAINS "no change":
-    Goto: BeginAssistant
-if {customizeSettings} IN {noList[*]}:
-    Goto: BeginAssistant
-
-# Variable: britWords = british, gb, uk
-if {customizeSettings} CONTAINS british, gb, uk:
-    customLanguage = "'en-GB'"
-else
-    if {customizeSettings} CONTAINS "Australian, AU, aussie":
-        customLanguage = "en-AU"
-    else
-        customLanguage = "en-us"
-
-if {customizeSettings} CONTAINS "female":
-    customLanguage = "{customLanguage} female"
-else
-    customLanguage = "{customLanguage} male"
-
-Language: {customLanguage}
-
-if {customizeSettings} CONTAINS "fast":
-    customProsody = "rate='fast'"
-else
-    if {customizeSettings} CONTAINS "slow":
-        customProsody = "rate='slow'"
-    else
-        customProsody = "rate='medium'"
-
-# Later: Provide example of new Language/Prosody and offer reset
-
-# Later: Make settings into a case statement and error check: 
-# split_words(wordList, customizeSettings) 
-# customSettingCount = length({wordList})
-# wordListIndex = 0
-# LOOP
-# Case
-# LOOP END
-
-@ReAskApps
-
-Name Speak : Pat : "Would you like to enable more Neon patient assistance applications including playing music, playing games, reminders for medicine, hydration, meals and sleep, requests to record symptoms or other stats,  and to request general information or assistance with math?"		
-
-timeoutReturnLabel = ReAskApps		
-voice_input{customizeSettings}		
-if {customizeSettings} == "":		
-    Goto: ReAskApps		
-
-if {customizeSettings} IN {noList[*]}:		
-    enableNeonApps = {False}		
-    Goto: BeginAssistant		
-
-@BeginAssistant
-
-timeoutReturnLabel = WaitForAlertPhrase
-Name Speak : Pat : "<prosody {customProsody}> Your demonstration patient assistant has signed in. If you want to know if I am listening, you can say, hey Pat, or, Pat are you there. </prosody>"
-
-# Wait for alert
-
-@WaitForAlertPhrase
-
-askPrompt = ""
-returnLabel = GotPatientPhrase
-### Name Speak : Pat : "PA 1 pre ask"
-Goto : ASK
-
-@GotPatientPhrase
-
-## Did patient ask for "help" 
-if {askReturnValue} !IN {alertsPhraseList[*]}:
-    ## Not an emergency alert, check for secondary (in progress)
-    if {enableNeonApps}:
-        ## if {askReturnValue} CONTAINS {inProgressList[*]}:
-        if {askReturnValue} STARTSWITH {inProgressList[*]}:
-            Name Speak : Pat : "I'm sorry {userName} that is under construction."
-    ## Not an alert, listen again
-    Goto: WaitForAlertPhrase
-
-# Possible EMERGENCY
-
-Name Speak : Pat : "Pat the Patient Assistant heard an emergency alert. I heard {askReturnValue}"
-Reconvey : askReturnValue
-Name Speak : Pat : "</speak>PA 6 did reconvey"
-
-@PromptConfirmHelp
-
-askPrompt = "Please say just kidding if this is not an emergency"
-returnLabel = ConfirmHelp
-Goto : ASK
-@ConfirmHelp
-
-## Did patient REALLY ask for "help"? 
-if {askReturnValue} == "":
-    Name Speak : Pat : "Pat the Patient Assistant heard nothing. I heard"
-    Reconvey : askReturnValue
-    Name Speak : Pat : "</speak>PA 8 did reconvey of nothing heard"
-
-    ## PA heard nothing after emergency request .. if second time then this is an emergency
-    if {heardSilence} == {True} :
-        Goto: Emergency
-    heardSilence = {True}
-    ## Increase volume and speak slowly
-    Name Speak : Pat : "<prosody volume='+100%' rate='slow'>{userName}! I need to hear from you! Is this an emergency?</prosody>"
-    Goto: PromptConfirmHelp
-if {askReturnValue} CONTAINS "just kidding", "never mind","not an emergency":
-    Name Speak : Pat : "Pat the Patient Assistant heard you say this is not an emergency. I heard"
-    Reconvey : askReturnValue
-    ### Name Speak : Pat : "</speak>Did reconvey of jk"
-
-    ## Patient said jk so restart listening
-    Name Speak : Pat : "Please say help again if this is an emergency."
-    Python: falseAlarmCount = {falseAlarmCount} + 1
-    Goto: WaitForAlertPhrase
-
-# EMERGENCY
-
-@Emergency
-
-Name Speak : Pat : "<prosody volume='+100%' rate='normal'>{userName}! Needs! Help! This is an EMERGENCY</prosody>"
-
-Name Speak : Pat : "Pat the Patient Assistant would now send an emergency alert, sound an alarm, keep engaged with the patient, and send updated alerts to the caregiver."
-
-Name Speak : Pat : "Pat test completed. Say start again to start again?"
-voice_input{askReturnValue}
-if {askReturnValue} == "start again":
-    Name Speak : Pat : "</speak>Pat is restarting. Thanks again."
-    Goto: StartUp
-
-Name Speak : Pat : "Pat exiting. Thanks again for helping test my skills."
-exit
-
-# ========== Subroutines
-
-@ASK
-# The ASK subroutine speaks the askPrompt and waits for a response. If the response is a command to Pat to perform an action, then the request is effected and Pat continues waiting for a response, otherwise, the response is returned to the caller in the askReturnValue. 
-# Input parameters: askPrompt, returnLabel and timeOutReturnLabel
-# Result parameter: askReturnValue
-
-### Name Speak : Pat : "Ask 1 Starting"
-if {askPrompt}:
-    Name Speak : Pat : " {askPrompt} "
-### Name Speak : Pat : "Ask 2 Starting ask subroutine"
-voice_input {askReturnValue}
-### Name Speak : Pat : "Ask 3 got input"
-if {askReturnValue} IN {exitList[*]}:
-    Name Speak : Pat : "Say yes to confirm exiting Pat, the Neon AI Patient Assistant"
-    voice_input{askReturnValue}
-    if {askReturnValue} IN {yesList[*]}:
-        Name Speak : Pat : "Pat, the Neon AI Patient Assistant, signing off"
-        exit
-    else
-        goto: ASK
-### Name Speak : Pat : "Ask 4 not cancel command {askReturnValue}"
-if {askReturnValue} IN {heyPatList[*]}:
-    Name Speak : Pat : "<prosody {customProsody}> {userName}, Pat the AI Patient Assistant demo here. I'm listening all the time but I don't <phoneme alphabet="x-sampa" ph="rikord">record</phoneme> everything you say. I only make recordings of calls for help or in an emergency. </prosody>"
-# Note - Disambiguation for the pronunciations of "record": <phoneme alphabet="x-sampa" ph="rikord">record</phoneme> Verb as in "I record everything you say" vs. Noun as in "Make a record of the conversation".
-    Name Speak : Pat : "The time is"
-    Execute : "Neon what time is it"
-    if {falseAlarmCount} != 0:
-        Name Speak : Pat : "The false alarm count is {falseAlarmCount}!"
-    goto : ASK
-### Name Speak : Pat : "Ask 5 About to return to {returnLabel}"
-Goto: {returnLabel}
-
-
-@TIMEOUT
-Goto: {timeoutReturnLabel}
-</p>
-</div>
 <button type="button" class="collapsible">Test Ssml</button>
 <div class="content">
   <p>Script: "Test SSML"
@@ -3968,13 +3108,13 @@ Neon speak: "Please tell me your full name or say exit"
             LOOP get_name END
         "change first name"
             Neon speak: "Tell me your first name or say exit"
-            voice_input{first_name}
+            voice_input(first_name)
             Execute: "neon my first name is {first_name}"
             Execute: "neon tell me my first name"
             LOOP change_name END
         "change last name"
             Neon speak: "Tell me your last name or say exit"
-            voice_input{last_name}
+            voice_input(last_name)
             Execute: "neon my last name is {last_name}"
             Execute: "neon tell me my last name"
             LOOP change_name END
@@ -4007,14 +3147,14 @@ Neon speak:
     "Say 2 or World Weather for world weather"
     "Say 3 or World Populations for world populations"
 voice_input(response)
-Case {response}:
+Case (response):
     "1 or World Times"
         Neon speak:
             "Say A or Athens for Athens's time"
             "Say B or Bombay for Bombay's time"
             "Say S or Seattle for Seattle's time"
         voice_input(response)
-        Case {response}:
+        Case (response):
             "A or Athens"
                 Execute: "What time is it in Athens"
                 Goto: athens_weather
@@ -4028,11 +3168,11 @@ Case {response}:
             "Say B or Bombay for the weather in Bombay"
             "Say S or Seattle for the weather in Seattle"
         voice_input(response)
-        Case {response}:
+        Case (response):
             "A or Athens"
                 @athens_weather
                 Execute: "What is the weather in Athens"
-                Goto: 50
+                Goto: 48
             "B or Bombay"
                 Execute: "What is the weather in Bombay"
             "S or Seattle"
@@ -4043,7 +3183,7 @@ Case {response}:
             "Say B or Bombay for Bombay's population"
             "Say S or Seattle for Seattle's population"
         voice_input(response)
-        Case {response}:
+        Case (response):
             "A or Athens"
                 Execute: "What is the population of Athens"
             "B or Bombay"
@@ -4130,7 +3270,7 @@ Execute: "tell me the time in {location}"
 Execute: "tell me the weather in {location}"
 Neon Speak: "Please ask me a question or say exit"
 voice_input(question)
-if {question} == "exit"
+if {question} == "exit":
     Exit
 Execute: "{question}"
 Exit</p>
@@ -4155,7 +3295,7 @@ Execute: "tell me the time in {location}"
 Execute: "tell me the weather in {location}"
 LOOP Q1
     Neon Speak: "Please ask me a question or say exit"
-    if {question} == "exit"
+    if {question} == "exit":
         Exit
     voice_input(question)
     #Execute: "{question}"
@@ -4217,14 +3357,14 @@ Neon speak:
     "Say 2 or World Weather for world weather"
     "Say 3 or World Populations for world populations"
 voice_input(response)
-Case {response}:
+Case (response):
     "1 or World Times"
         Neon speak:
             "Say A or Athens for Athens's time"
             "Say B or Bombay for Bombay's time"
             "Say S or Seattle for Seattle's time"
         voice_input(response)
-        Case {response}:
+        Case (response):
             "A or Athens"
                 Execute: "What time is it in Athens"
             "B or Bombay"
@@ -4237,7 +3377,7 @@ Case {response}:
             "Say B or Bombay for the weather in Bombay"
             "Say S or Seattle for the weather in Seattle"
         voice_input(response)
-        Case {response}:
+        Case (response):
             "A or Athens"
                 Execute: "What is the weather in Athens"
             "B or Bombay"
@@ -4250,7 +3390,7 @@ Case {response}:
             "Say B or Bombay for Bombay's population"
             "Say S or Seattle for Seattle's population"
         voice_input(response)
-        Case {response}:
+        Case (response):
             "A or Athens"
                 Execute: "What is the population of Athens"
             "B or Bombay"
