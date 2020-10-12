@@ -21,8 +21,8 @@ Goto : ASK
 @InstallAssistant
 
 userName = askInput
-Name Speak : Patty : "Hi {userName}. I am glad you chose to test subroutines."
-Name Speak : Patty : "Patty Exiting"
+Name Speak: Patty, "Hi {userName}. I am glad you chose to test subroutines."
+Name Speak: Patty, "Patty Exiting"
 exit
 
 ##
@@ -30,7 +30,7 @@ exit
 @ASK
 if {askPrompt} != ""
     Name Speak : Patty, "{askPrompt}"
-voice_input {askInput}
+voice_input(askInput)
 if {askInput} IN {exitList[*]}:
     Name Speak : Patty, "Say yes to confirm exiting Patty"
     voice_input(askInput)

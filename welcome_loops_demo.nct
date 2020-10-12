@@ -16,7 +16,7 @@ Execute: "tell me the time in {location}"
 Execute: "tell me the weather in {location}"
 LOOP Q1
     Neon Speak: "Please ask me a question or say exit"
-    if {question} == "exit"
+    if {question} == "exit":
         Exit
     voice_input(question)
     #Execute: "{question}"

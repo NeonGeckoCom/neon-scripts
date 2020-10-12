@@ -25,13 +25,13 @@ Neon speak: "Please tell me your full name or say exit"
             LOOP get_name END
         "change first name"
             Neon speak: "Tell me your first name or say exit"
-            voice_input{first_name}
+            voice_input(first_name)
             Execute: "neon my first name is {first_name}"
             Execute: "neon tell me my first name"
             LOOP change_name END
         "change last name"
             Neon speak: "Tell me your last name or say exit"
-            voice_input{last_name}
+            voice_input(last_name)
             Execute: "neon my last name is {last_name}"
             Execute: "neon tell me my last name"
             LOOP change_name END

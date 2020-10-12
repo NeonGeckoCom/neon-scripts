@@ -72,7 +72,7 @@ voice_input(moreAppInfo)
 #if {moreAppInfo} !IN {yesNoList[*]}:
 #    Goto: promptMoreAppInfo
 #if {moreAppInfo} IN {noList[*]}:
-if {moreAppInfo} IN {noList[*]}:
+If {moreAppInfo} IN {noList[*]}:
     Goto: BeginScreening
 Name Speak: "Robbie", "The Neon conversational demonstration Covid-19 screening application is based on the Center for Disease Control and Prevention recommendations for the Coronavirus Disease 2019 Telephone Response Guide. The Covid-19 screening script is available at CDC dot gov website. </speak>https://www.cdc.gov/coronavirus/2019-ncov/hcp/phone-guide/ "
 
@@ -85,11 +85,11 @@ Name Reconvey: "Robbie", "In response to screening questions you can say details
 @promptUserRef
 Name Reconvey: "Robbie", "Are you asking for help for yourself, or for someone else?"
 voice_input(covidUserRef)
-if {covidUserRef} IN {detailsList[*]}:
+If {covidUserRef} IN {detailsList[*]}:
     Name Speak: "Robbie", "For record keeping, we need to keep track of who we interact with."
     Goto: promptUserRef
-#if {covidUserRef} == "myself":
-if {covidUserRef} IN {userSelfRefsList[*]}:
+#If {covidUserRef} == "myself":
+If {covidUserRef} IN {userSelfRefsList[*]}:
     userRef1 = "have you"
     userRef2 = "are you"
     userRef3 = "do you"
@@ -97,7 +97,7 @@ if {covidUserRef} IN {userSelfRefsList[*]}:
     userRef2C = "Are you"
     userRef3C = "Do you"
 else:
-    if {covidUserRef} IN {userElseRefsList[*]}:
+    If {covidUserRef} IN {userElseRefsList[*]}:
         userRef1 = "has the person you are calling about"
         userRef2 = "is the person for whom you are calling"
         userRef3 = "does the person you are calling about"
@@ -121,22 +121,22 @@ Name Reconvey: "Robbie", "Are you ill of contacting on behalf of someone who is 
 
 # "Are you ill (or contacting on behalf of someone who is ill)?" 
 voice_input(covidIll)
-if {covidIll} IN {detailsList[*]}:
+If {covidIll} IN {detailsList[*]}:
     Name Reconvey: "Robbie", "We are demonstrating CDC's Covid-19 symptom screening for people who feel ill."
     Name Reconvey: "Robbie", "If you are not showing symptoms of illness, then this screening system can not help you."
     Name Reconvey: "Robbie", "If you are concerned you have Covid-19 infection you should contact your care advisor, since some people who have the Covid-19 infection are non-symptomatic."
     Goto: promptUserRef
-if {covidIll} IN {noList[*]}:
+If {covidIll} IN {noList[*]}:
     Name Speak: "Robbie", "You're not symptomatic of Covid-19 but if you are concerned you have Covid-19 infection you should contact your care advisor."
     Name Speak: "Robbie", "Option for additional information on Covid-19 symptoms are in progress."
     Goto: A-noSymptoms 
 # TODO: This could do something other than run exit, continue prompting? Ask to start over? Ask to check other symptoms?
     # Exit - Only for sick people
 else:
-    if {covidIll} IN {yesList[*]}:
+    If {covidIll} IN {yesList[*]}:
         Goto: promptAge
     else:
-        if {covidIll} == "start over":
+        If {covidIll} == "start over":
             Goto: startCovidScreening
         else:
             Goto: promptIll
@@ -145,13 +145,13 @@ else:
 @promptAge
 Name Reconvey: "Robbie", "This audio guide is for people over 5. How many years old are you or the person you are calling about?"
 voice_input(covidAge)
-if {covidAge} IN {detailsList[*]}:
+If {covidAge} IN {detailsList[*]}:
     Name Speak: "Robbie", "This demonstration of conversational Covid-19 symptom screening is for people over the age of 5. Thank you for helping test the Neon Covid-19 screener."
     Goto: promptAge
-if {covidAge} < 5:
+If {covidAge} < 5:
     Goto: C-lessThanFive 
 else:
-    if {covidAge} >= 5:
+    If {covidAge} >= 5:
         Goto: promptLifeThreatening
     else:
         Goto: promptAge
@@ -163,11 +163,11 @@ else:
 @promptLifeThreatening
 Name Speak: "Robbie", "{userRef3C} have a life-threatening emergency medical condition? Say details for details."
 voice_input(covidLifeThreat)
-if {covidLifeThreat} IN {noList[*]}:
+If {covidLifeThreat} IN {noList[*]}:
     Goto: promptContact  
 else:
     # if {covidLifeThreat} == "details":
-    if {covidLifeThreat} IN {detailsList[*]}:
+    If {covidLifeThreat} IN {detailsList[*]}:
         Name Speak: "Robbie", "Life-threatening emergency medical conditions include these symptoms:"
         Name Speak: "Robbie", "Extremely difficult breathing (can't talk without gasping for air); "
         Name Speak: "Robbie", "Blue-colored lips or face; Severe, constant dizziness or lightheadedness; "
@@ -177,7 +177,7 @@ else:
         Name Speak: "Robbie", "Anyone with a life-threatening emergency should immediately call 911."
         Name Speak: "Robbie", "Thank you for helping test the Neon Covid-19 screener."
         Goto: promptLifeThreatening
-    if {covidLifeThreat} !IN {yesList[*]}:
+    If {covidLifeThreat} !IN {yesList[*]}:
             Goto: promptLifeThreatening
     Goto: B-call911
 
@@ -188,13 +188,13 @@ else:
 @promptContact
 Name Speak: "Robbie", "In the two weeks leading up to feeling sick {userRef1} had contact with someone who was diagnosed with COVID-19, or live in or recently visited a place where COVID-19 is spreading?"
 voice_input(covidContact)
-if {covidContact} IN {detailsList[*]}:
+If {covidContact} IN {detailsList[*]}:
     Name Speak: "Robbie", "It is important for record keeping to keep track of known contacts to people or places that expose them to Covid-19. Thank you for helping test the Neon Covid-19 screener."
     Goto: promptContact
-if {covidContact} IN {noList[*]}:
+If {covidContact} IN {noList[*]}:
     covidContact = {False}  
 else:
-    if {covidContact} !IN {yesList[*]}:
+    If {covidContact} !IN {yesList[*]}:
         Goto: promptContact
     covidContact = {True} 
 

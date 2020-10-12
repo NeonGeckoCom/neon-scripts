@@ -246,7 +246,7 @@ if {askReturnValue} IN {exitList[*]}:
         goto: ASK
 ### Name Speak: Pat, "Ask 4 not cancel command {askReturnValue}"
 if {askReturnValue} IN {heyPatList[*]}:
-    Name Speak: Pat, "<prosody {customProsody}> {userName}, Pat the AI Patient Assistant demo here. I'm listening all the time but I don't <phoneme alphabet="x-sampa" ph="rikord">record</phoneme> everything you say. I only make recordings of calls for help or in an emergency. </prosody>"
+    Name Speak: Pat, "<prosody {customProsody}> {userName}, Pat the AI Patient Assistant demo here. I'm listening all the time but I don't <phoneme alphabet='x-sampa' ph='rikord'>record</phoneme> everything you say. I only make recordings of calls for help or in an emergency. </prosody>"
 # Note - Disambiguation for the pronunciations of "record": <phoneme alphabet="x-sampa" ph="rikord">record</phoneme> Verb as in "I record everything you say" vs. Noun as in "Make a record of the conversation".
     Name Speak: Pat, "The time is"
     Execute : "Neon what time is it"
