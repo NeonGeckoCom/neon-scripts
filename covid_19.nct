@@ -52,7 +52,7 @@ Variable: userSelfRefsList =  "self", "myself", "me"
 Variable: userElseRefsList =  "else", "someone else", "friend"
 
 Name Speak: Robbie, "<speak></speak>This demonstration is based on the CDC's guide recommendations for Covid-19 phone screening, as of June 2020, and should not be considered a CDC or medically approved application at this time."
-# Name Speak: Robbie : "<speak></speak>Some text to print and not speak."
+# Name Speak: Robbie, "<speak></speak>Some text to print and not speak."
 
 
 #GREETING
@@ -72,7 +72,7 @@ voice_input(moreAppInfo)
 #if {moreAppInfo} !IN {yesNoList[*]}:
 #    Goto: promptMoreAppInfo
 #if {moreAppInfo} IN {noList[*]}:
-if {moreAppInfo} IN {noList[*]}:
+If {moreAppInfo} IN {noList[*]}:
     Goto: BeginScreening
 Name Speak: Robbie, "The Neon conversational demonstration Covid-19 screening application is based on the Center for Disease Control and Prevention recommendations for the Coronavirus Disease 2019 Telephone Response Guide. The Covid-19 screening script is available at CDC dot gov website. </speak>https://www.cdc.gov/coronavirus/2019-ncov/hcp/phone-guide/ "
 
@@ -85,11 +85,11 @@ Name Speak: Robbie, "In response to screening questions you can say details to h
 @promptUserRef
 Name Speak: Robbie, "Are you asking for help for yourself or for someone else?"
 voice_input(covidUserRef)
-if {covidUserRef} IN {detailsList[*]}:
+If {covidUserRef} IN {detailsList[*]}:
     Name Speak: Robbie, "For record keeping, we need to keep track of who we interact with."
     Goto: promptUserRef
 #if {covidUserRef} == "myself":
-if {covidUserRef} IN {userSelfRefsList[*]}:
+If {covidUserRef} IN {userSelfRefsList[*]}:
     userRef1 = "have you"
     userRef2 = "are you"
     userRef3 = "do you"
@@ -97,7 +97,7 @@ if {covidUserRef} IN {userSelfRefsList[*]}:
     userRef2C = "Are you"
     userRef3C = "Do you"
 else:
-    if {covidUserRef} IN {userElseRefsList[*]}:
+    If {covidUserRef} IN {userElseRefsList[*]}:
         userRef1 = "has the person you are calling about"
         userRef2 = "is the person for whom you are calling"
         userRef3 = "does the person you are calling about"
@@ -118,10 +118,10 @@ Name Speak: Robbie, "Got it {userName}."
 Name Speak: Robbie, "This audio guide is for people who are ill. {userRef2C} ill?"   
 # "Are you ill (or contacting on behalf of someone who is ill)?" 
 voice_input(covidIll)
-if {covidIll} IN {detailsList[*]}:
+If {covidIll} IN {detailsList[*]}:
     Name Speak: Robbie, "We are demonstrating CDC's Covid-19 symptom screening for people who feel ill. If you are not showing symptoms of illness, then this screening system can not help you. If you are concerned you have Covid-19 infection you should contact your care advisor, since some people who have the Covid-19 infection are non-symptomatic."
     Goto: promptUserRef
-if {covidIll} IN {noList[*]}:
+If {covidIll} IN {noList[*]}:
     Name Speak: Robbie, "You're not symptomatic of Covid-19 but if you are concerned you have Covid-19 infection you should contact your care advisor."
     Name Speak: Robbie, "Option for additional information on Covid-19 symptoms are in progress."
     Goto: A-noSymptoms 

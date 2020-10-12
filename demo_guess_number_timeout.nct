@@ -15,8 +15,8 @@ Neon speak:
     "I'm thinking of a number between 1 and 10"
     "Guess what it is or say 'exit'"
 LOOP guess
-voice_input{user_guess}
-if {user_guess} in {numbers}:
+voice_input(user_guess)
+If {user_guess} IN {numbers}:
     if {user_guess} == {neon_num}:
         Neon speak: "You guessed it!"
         Exit

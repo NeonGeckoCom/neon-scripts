@@ -16,7 +16,7 @@ Execute: "tell me the time in {location}"
 Execute: "tell me the weather in {location}"
 Neon Speak: "Please ask me a question or say exit"
 voice_input(question)
-if {question} == "exit"
+if {question} == "exit":
     Exit
 Execute: "{question}"
 Exit
