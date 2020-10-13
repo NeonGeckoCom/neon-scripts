@@ -3,47 +3,33 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-.collapsible {
-  background-color: #777;
-  color: white;
-  cursor: pointer;
-  padding: 18px;
-  width: 100%;
-  border: none;
-  text-align: left;
-  outline: none;
-  font-size: 15px;
-}
-
-.active, .collapsible:hover {
-  background-color: #555;
-}
-
 .content {
   padding: 0 18px;
-  display: none;
   overflow: hidden;
-  background-color: #f1f1f1;
 }
-
+p {
+  margin: 0px;
+}
 div {
   white-space: pre-wrap;
+  margin: 0px;
 }
+h4 {
+  margin: 0px;
+}
+
 </style>
 </head>
 <body>
 
-<button type="button" class="collapsible">A Test</button>
-<div class="content">
-  <p>Script: "A Test"
+[collapsed][collapsed title=A Test:]
+Script: "A Test"
 Variable: intent = "what is the weather"
 Neon Speak: "It is currently {skill("what is the weather", weather)}"
 Exit
-</p>
-</div>
-<button type="button" class="collapsible">Apple Navigator</button>
-<div class="content">
-  <p>Script: "Apple Navigator"
+[/collapse]
+[collapsed][collapsed title=Apple Navigator:]
+Script: "Apple Navigator"
 Author: Neongecko
 Variable: options = table_scrape(https://apple.com)
 Variable: chosen = ""
@@ -65,19 +51,15 @@ LOOP WN
 ........Neon speak: "Tell me another Apple web page you'd like to see or say quit."
 LOOP WN END
 Exit
-</p>
-</div>
-<button type="button" class="collapsible">Basic Execute</button>
-<div class="content">
-  <p>Script: "Basic Execute"
+[/collapse]
+[collapsed][collapsed title=Basic Execute:]
+Script: "Basic Execute"
 Neon speak: "Lets get started."
 Execute: "What time is it"
 Neon speak: "I'm finished."
-Exit</p>
-</div>
-<button type="button" class="collapsible">Betsy</button>
-<div class="content">
-  <p>Script: "Betsy"
+Exit[/collapse]
+[collapsed][collapsed title=Betsy:]
+Script: "Betsy"
 Variable: name
 Variable: more
 Name Speak: Betsy, "Welcome to the Neongecko Intro, My name is Betsy."
@@ -86,11 +68,9 @@ voice_input(name)
 Name Speak: Betsy, "hi {name}"
 Name Speak: Betsy, " I am good at math. You can ask me questions like what is the log base 10 of 1 million"
 Name Speak: Betsy, "After this start up script exits, if your microphone and speakers are enabled, you can ask me questions out loud and hear my answers. Otherwise you can type questions in the dialog box above."
-EXIT</p>
-</div>
-<button type="button" class="collapsible">Cate</button>
-<div class="content">
-  <p>Script: "Cate"
+EXIT[/collapse]
+[collapsed][collapsed title=Cate:]
+Script: "Cate"
 Variable: name
 Variable: more
 Language: en-in, female
@@ -100,11 +80,9 @@ voice_input(name)
 Name Speak: Cate, "hi {name}"
 Name Speak: Cate, " I am a caffeine wiz! You can ask me the caffeine content of most popular USA drinks and boosters" 
 Name Speak: Cate, "If your microphone and speakers are enabled you can ask me questions out loud, and hear my answers. Otherwise you can type your questions in the box, after this start up exits."
-Exit</p>
-</div>
-<button type="button" class="collapsible">Convert Demo</button>
-<div class="content">
-  <p>Script: "Convert Demo"
+Exit[/collapse]
+[collapsed][collapsed title=Convert Demo:]
+Script: "Convert Demo"
 Language: en-us, female
 Variable: quantity
 Variable: from_units
@@ -120,11 +98,9 @@ voice_input(from_units)
 Neon speak: "What are the units to convert to?"
 voice_input(to_units)
 Execute: "how many {to_units} are in {quantity} {from_units}"
-Exit</p>
-</div>
-<button type="button" class="collapsible">Covid 19</button>
-<div class="content">
-  <p>Script: "Covid 19" 
+Exit[/collapse]
+[collapsed][collapsed title=Covid 19:]
+Script: "Covid 19" 
 Language: "en-us male"
 @restartCovidScreening
 
@@ -925,11 +901,9 @@ Name Speak: Robbie, "Thank you {userName} for helping me practice my conversatio
 exit
 
 
-</p>
-</div>
-<button type="button" class="collapsible">Covid 19 Audio</button>
-<div class="content">
-  <p>Script: "Covid 19 Audio"
+[/collapse]
+[collapsed][collapsed title=Covid 19 Audio:]
+Script: "Covid 19 Audio"
 Language: en-us, male
 @restartCovidScreening
 
@@ -1744,11 +1718,9 @@ if {askReturnValue} IN {yesList[*]}:
 Name Speak: "Robbie", "Thank you {userName} for helping me practice my conversational skills and letting me practice help you."
 
 exit
-</p>
-</div>
-<button type="button" class="collapsible">Demo Guess Number Timeout</button>
-<div class="content">
-  <p>Script: "Demo Guess Number Timeout"
+[/collapse]
+[collapsed][collapsed title=Demo Guess Number Timeout:]
+Script: "Demo Guess Number Timeout"
 Author: Daniel McKnight
 Timeout: 15
 Description:
@@ -1781,11 +1753,9 @@ else
         Neon speak:
         "That's not a valid guess, try again."
         LOOP guess END
-Exit</p>
-</div>
-<button type="button" class="collapsible">Demo Profile Reconveyance</button>
-<div class="content">
-  <p>Script: Demo Profile Reconveyance
+Exit[/collapse]
+[collapsed][collapsed title=Demo Profile Reconveyance:]
+Script: Demo Profile Reconveyance
 Variable: body = "Test email body\nnewline"
 Variable: emailAddr = profile(user.email)
 Variable: spoken
@@ -1799,11 +1769,9 @@ Neon Speak: You said:
 Reconvey: spoken
 
 Exit
-</p>
-</div>
-<button type="button" class="collapsible">Demo Weather Loop</button>
-<div class="content">
-  <p>Script: "Demo Weather Loop" 
+[/collapse]
+[collapsed][collapsed title=Demo Weather Loop:]
+Script: "Demo Weather Loop" 
 Variable: location
 Variable: forecast
 LOOP WW
@@ -1837,11 +1805,9 @@ LOOP WW END
 Neon speak: "I'm done now."
 Exit
 
-</p>
-</div>
-<button type="button" class="collapsible">Eddie</button>
-<div class="content">
-  <p>Script: "Eddie"
+[/collapse]
+[collapsed][collapsed title=Eddie:]
+Script: "Eddie"
 Variable: name
 Variable: more
 Language: en-gb, male
@@ -1852,11 +1818,9 @@ Name Speak: Eddie, "hi {name}"
 Name Speak: Eddie, " I am good at searching for your favorite music and videos" 
 Name Speak: Eddie, "You can ask me to play songs, albums, artists, shows, movies, and more."
 Name Speak: Eddie, "If your microphone and speakers are enabled you can ask me questions out loud, and hear my answers. Otherwise you can type your questions in the box, after this start up exits."
-EXIT</p>
-</div>
-<button type="button" class="collapsible">Eliza 1965</button>
-<div class="content">
-  <p>Script: Eliza 1965
+EXIT[/collapse]
+[collapsed][collapsed title=Eliza 1965:]
+Script: Eliza 1965
 Language: "en-GB female"
 
 Variable: input = ""
@@ -1969,22 +1933,18 @@ LOOP pre
 LOOP pre END
 
 Neon speak: {final}
-Exit</p>
-</div>
-<button type="button" class="collapsible">Good Morning</button>
-<div class="content">
-  <p>Script: "Good Morning"
+Exit[/collapse]
+[collapsed][collapsed title=Good Morning:]
+Script: "Good Morning"
 Neon speak: "Good Morning"
     "The time is"
 Execute: "What time is it"
 Neon speak: "The weather is"
 Execute: "what is the weather"
 Neon speak: "Thank you for starting me up. I look forward to talking with you"
-Exit</p>
-</div>
-<button type="button" class="collapsible">Grocery Greeter</button>
-<div class="content">
-  <p>Script: "Grocery Greeter"
+Exit[/collapse]
+[collapsed][collapsed title=Grocery Greeter:]
+Script: "Grocery Greeter"
 Variable: init
 Variable: name
 Variable: more
@@ -2032,20 +1992,468 @@ LOOP Q1
 LOOP Q1 END
 @say_goodbye
 Neon Speak: "Goodbye"
-Exit</p>
-</div>
-<button type="button" class="collapsible">Hello World Input</button>
-<div class="content">
-  <p>Script: "Hello World Input"
+Exit[/collapse]
+[collapsed][collapsed title=Guess My Word:]
+Script: "Guess My Word"
+Language: en-us, female
+
+# Demonstration word game player from Neon AI
+# "Hi {userName}. Let's play the game guess my 7 word popular phrase. It very simple. I will choose a 7 word phrase and tell you one word. Then you guess a word, and if it is in the seven work phrase I will tell you its position or to guess again. Anytime you want you can guess the phrase, just say I guess  and I will tell you if you're right. If you want me to tell you what you've already guessed, just say recap or history. Say hint and I will tell you another word."
+# Later n word phrases; n letter words; subject specific popular phrase input from Wolfram, google; foreign language
+
+# Set up wait time for participant responses
+Variable: timeoutReturnLabel = AnnounceVersion
+Timeout: 30, TIMEOUT
+
+@AnnounceVersion
+
+Name Speak: Gamon,"Neon Word Game Demonstration Version 2020 08 06 22:30 </speak> Testing"
+# Announce version ("Testing" is displayed as text and is not spoken)
+
+Variable: sevenWordPhraseArray = "A DATE THAT WILL LIVE IN INFAMY",
+    "A DAY THAT WILL LIVE IN INFAMY",
+    "A WORD TO THE WISE IS ENOUGH",
+    "A WORD TO THE WISE IS SUFFICIENT",
+    "AND A MERRY OLD SOUL WAS HE",
+    "CAN'T SEE THE FOREST FOR THE TREES",
+    "CHILL OUT AND PLAY SOME VIDEO GAMES",
+    "COME OUT COME OUT WHEREVER YOU ARE",
+    "I SMELL THE BLOOD OF AN ENGLISHMAN",
+    "I'M LATE FOR A VERY IMPORTANT DATE",
+    "IF IT AIN'T BROKE DON'T FIX IT",
+    "IF YOU BUILD IT HE WILL COME",
+    "IF YOU BUILD IT THEY WILL COME",
+    "IT WAS A DARK AND STORMY NIGHT",
+    "IT'S ALL HUMBUG I TELL YOU HUMBUG",
+    "JACK AND JILL WENT UP THE HILL",
+    "JACK FELL DOWN AND BROKE HIS CROWN",
+    "LAUGH AND THE WORLD LAUGHS WITH YOU",
+    "LEAP TALL BUILDINGS IN A SINGLE BOUND",
+    "LIFE LIBERTY AND THE PURSUIT OF HAPPINESS",
+    "LIONS AND TIGERS AND BEARS OH MY",
+    "LITTLE BO PEEP HAS LOST HER SHEEP",
+    "LITTLE PIGS LITTLE PIGS LET ME IN",
+    "LIVE FROM NEW YORK IT'S SATURDAY NIGHT",
+    "NEITHER A BORROWER NOR A LENDER BE",
+    "NOT BY THE HAIR ON MY CHINNY-CHIN-CHIN",
+    "NOT BY THE HAIR OF MY CHINNY-CHIN-CHIN",
+    "NOW I LAY ME DOWN TO SLEEP",
+    "OH WHAT A TANGLED WEB WE WEAVE",
+    "ONE THING I CAN SAY FOR SURE",
+    "OLD MOTHER HUBBARD WENT TO THE CUPBOARD",
+    "OVER THE RIVER AND THROUGH THE WOODS",
+    "THE BEST-LAID SCHEMES OF MICE AND MEN",
+    "THE BEST-LAID PLANS OF MICE AND MEN",
+    "DISCRETION IS THE BETTER PART OF VALOR",
+    "THE BETTER PART OF VALOR IS DISCRETION",
+    "THE FACE THAT LAUNCHED A THOUSAND SHIPS",
+    "THE HABITS OF HIGHLY EFFECTIVE PEOPLE",
+    "THE STUFF THAT DREAMS ARE MADE FROM",
+    "THE STUFF THAT DREAMS ARE MADE OF",
+    "THE STUFF OF WHICH DREAMS ARE MADE",
+    "THE STUFF FROM WHICH DREAMS ARE MADE",
+    "THINGS THAT GO BUMP IN THE NIGHT",
+    "THIS IS THE SONG THAT NEVER ENDS
+    "TO ERR IS HUMAN TO FORGIVE DIVINE",
+    "TO FETCH HER POOR DOG A BONE",
+    "WE HOLD THESE TRUTHS TO BE SELF-EVIDENT",
+    "WE THE PEOPLE OF THE UNITED STATES",
+    "WHEN IN THE COURSE OF HUMAN EVENTS"
+
+Variable: usedPhrases
+Variable: chosenPhrase
+Variable: hintCount
+Variable: sayNext
+Variable: foundWords
+Variable: chosenPhraseWords
+Variable: chosenPhraseWordsByLen
+Variable: iWord
+Variable: blankCount
+Variable: userInput
+Variable: userInputWords
+Variable: userInputWordsLen
+
+usedPhrases[*] = ""
+
+Variable: True = 1		
+Variable: False = 0		
+Variable: exitList = "exit", "cancel", "never mind"
+Variable: noList
+Variable: yesList
+Variable: alertsPhraseList
+Variable: inProgressList
+Variable: heyList
+Variable: askPrompt
+Variable: returnLabel
+Variable: heardSilence
+Variable: falseAlarmCount
+Variable: askReturnValue
+Variable: userName
+Variable: moreAppInfo
+Variable: customizeSettings
+Variable: customizeLanguage
+Variable: customizeProsody
+Variable: photoTime
+Variable: enableNeonApps
+
+@StartUp
+
+# Initialize
+
+# exitList = "exit", "cancel", "never mind"
+noList = "no", "not now", "never mind", "nope", "n" 
+yesList = "yes", "yup", "y"
+
+alertsPhraseList = "help", "I need help", "help me", "emergency", "this is an emergency", "i need a doctor", "i need a doctor", "i need a doctor", "i need a doctor", "i need a doctor", "i need a nurse", "i need aid", "i need a caregiver", "i need assistance", "i fell", "i can't get up", "fire"
+
+inProgressList = "what time is it", "Remind me to", "Play", "Record this", "Send an email", "Send a text"
+
+heyList = "hey Gamon", "Gamon are you there", "is anybody listening", "what time is it"
+
+speechGenderList = "female", "male"
+speechRateList = "medium", "fast", "slow"
+speechAccentList = "American", "British", "Australian"
+
+askPrompt = ""
+returnLabel = "" 
+heardSilence = ""
+falseAlarmCount = 0
+askReturnValue = ""
+userName = ""
+moreAppInfo = ""
+customizeSettings = ""
+customizeLanguage = ""
+customProsody = "rate='medium'"
+photoTime = ""
+enableNeonApps = {True}
+
+# Ask to install assistant
+
+@PromptInstallAssistant
+
+returnLabel = InstallAssistant
+timeoutReturnLabel = PromptInstallAssistant
+Name Speak: Gamon,"Hi, I'm Gamon. I'm a demonstration word game player from Neon AI. Thank you for helping test my conversational skills."
+askPrompt = "Please tell me your name, or you can say cancel to exit."
+GOTO : ASK
+
+@InstallAssistant
+
+userName = {askReturnValue}
+
+Name Speak: Gamon,"Hi {userName}. I am glad you chose to play word games with me."
+
+## Offer additional information
+
+@ReAskMoreInfo
+
+Name Speak: Gamon,"Before starting the Neon Word Game, would you like more information on the Neon conversational AI?"
+timeoutReturnLabel = ReAskMoreInfo
+voice_input(moreAppInfo)
+if {moreAppInfo} IN {noList[*]}:
+    GOTO : PromptCustomize
+
+Name Speak: Gamon,"Hi {userName}. I'm Gamon the word games playing assistant from Neon AI. I am an artificial intelligence personal assistant, I'm augmented with Neon Gecko open source code and CPI Corp patented technology."
+
+# Customize
+
+@PromptCustomize
+
+## Offer customization of settings for administrator, voice and system settings
+## Set up PA voice: name, gender, accent, pitch, speed, [Later: language, diction, empathy]
+## Set up system settings: timeoutSeconds (wait time for user input)
+
+customLanguage = ""
+enableNeonApps = {True}		
+
+Name Speak: Gamon,"Would you like to customize the Neon Word Game settings to change my voice?"
+# Later: Provide example of new Language/Prosody and offer reset
+
+timeoutReturnLabel = PromptCustomize
+voice_input(customizeSettings)
+if {customizeSettings} !IN {yesList[*]}:
+    GOTO : BeginAssistant
+
+Name Speak: Gamon,"Hi {userName}. You can customize my voice for the Neon demonstration conversational game player. You can say female, male, normal, fast, slow, American, British or Australian, or say no change. </speak>"
+
+@ReAskCustomize
+
+# Name Speak: Gamon,"Would you like to change the voice of the Neon conversational Word Game Assistant?"
+
+timeoutReturnLabel = ReAskCustomize
+voice_input(customizeSettings)
+if {customizeSettings} == "":
+    GOTO : PromptCustomize
+if {customizeSettings} CONTAINS "no change":
+    GOTO : BeginAssistant
+if {customizeSettings} IN {noList[*]}:
+    GOTO : BeginAssistant
+
+# Variable: britWords = british, gb, uk
+if {customizeSettings} CONTAINS british, gb, uk:
+    customLanguage = "'en-GB'"
+else
+    if {customizeSettings} CONTAINS "Australian, AU, aussie":
+        customLanguage = "en-AU"
+    else
+        customLanguage = "en-us"
+
+if {customizeSettings} CONTAINS "female":
+    customLanguage = "{customLanguage} female"
+else
+    customLanguage = "{customLanguage} male"
+
+Language: {customLanguage}
+
+if {customizeSettings} CONTAINS "fast":
+    customProsody = "rate='fast'"
+else
+    if {customizeSettings} CONTAINS "slow":
+        customProsody = "rate='slow'"
+    else
+        customProsody = "rate='medium'"
+
+@ReAskApps
+
+Name Speak: Gamon,"Would you like to enable more Neon applications including playing music, playing other games, taking notes, setting reminders, making calculation, requesting general information or changing my voice?"		
+
+timeoutReturnLabel = ReAskApps		
+voice_input(customizeSettings)
+if {customizeSettings} == "":		
+    GOTO : ReAskApps		
+
+if {customizeSettings} IN {noList[*]}:		
+    enableNeonApps = {False}		
+    GOTO : BeginAssistant		
+
+@BeginAssistant
+
+timeoutReturnLabel = WaitForAlertPhrase
+Name Speak: Gamon,"<prosody {customProsody}> Your demonstration word game assistant has signed in. If you want to know if I am listening, you can say, hey Gamon , or, Gamon are you there. </prosody>"
+
+Name Speak: Gamon,"Hi {userName}. Let's play the game guess my 7 word popular phrase. It very simple. I will choose a 7 word phrase and tell you one word. Then you guess a word, and if it is in the seven work phrase I will tell you its position or to guess again. Anytime you want you can guess the phrase, just say I guess  and I will tell you if you're right. If you want me to tell you what you've already guessed, just say recap or history. Say hint and I will tell you another word."
+
+### SET UP GAME
+
+# Choose New Phrase
+@ChooseNewPhrase
+chosenPhrase = random(sevenWordPhraseArray)
+# Check if used before
+if usedPhrases CONTAINS chosenPhrase
+    GOTO : ChooseNewPhrase
+
+# Add New Phrase to list of phrased used
+usedPhrases = chosenPhrase
+
+hintCount = 0
+sayNext = ""
+foundWords[*] = ""
+
+# Build word row for the sevenWordPhrase
+Python: chosenPhraseWords = chosenPhrase.split()
+# Build word row by word length [0]..[6]
+Python: chosenPhraseWordsByLen = chosenPhraseWords.sort(key=len)
+
+@NextHint
+
+# Give first or next hint
+if foundWords CONTAINS chosenPhraseWordsByLen[hintCount] :
+    Python: hintCount++
+    GOTO : NextHint
+Name Speak: Gamon,"Hint {hintCount}, the {sayNext} longest word is" {chosenPhraseWordsByLen[hintCount]}
+foundWords = {chosenPhraseWordsByLen[hintCount]}
+Python: hintCount++
+sayNext = "next"
+
+@GuessNextWord
+
+Name Speak: Gamon,"Here's where we're at"
+iWord = 0
+blankCount = 0
+LOOP SayFoundWords
+    if chosenPhraseWord[iWord] in foundWords :
+        Name Speak: Gamon,chosenPraseWord[i]
+    else
+        Name Speak: Gamon,"blank"
+        Python: blankCount++
+    Python: iWord++
+LOOP SayFoundWords UNTIL iWord >= 7
+
+if blankCount == 0
+    Name Speak: Gamon,"Game Over! Thank you {userName} for playing with me"
+    Name Speak: Gamon,"Let's play again"
+    GOTO : ChooseNewPhrase
+
+
+### Wait for Gamon/Emergency/Neon activiation alert phrase
+
+@WaitForAlertPhrase
+
+askPrompt = "Say I guess followed by a word, or I guess followed a phrase, or hint or recap or guessed words or exit"
+timeoutReturnLabel = WaitForAlertPhrase
+returnLabel = GotUserPhrase
+Goto : ASK
+
+@GotUserPhrase
+
+userInput = askReturnValue
+if {userInput} == "" :
+    GOTO : ReAskGuess
+
+if {userInput} STARTSWITH "hint" :
+    GOTO : NextHint
+
+if {userInput} IN "guessed words", "recap", "history" :
+    Name Speak: Gamon, "Here are your mis guessed words: {guessedWords}"
+    GOTO : GuessNextWord
+
+if {userInput} STARTSWITH "I guess" :
+    Python: userInputWords = userInput.split()
+    Python: userInputWordsLen = len(userInputWords) 
+    Python: userInputWords = userInput.split()
+
+    if userInputWordsLen == 3 :
+        guessedWord = userInputWords[2]
+        if chosenPhraseWords[*] CONTAINS guessedWord :
+            if guessedWord !IN foundWords[*] :
+                foundWords = guessedWord
+            else
+                if guessedWord !IN misGuessedWords[*] :
+                    misGuessedWords = guessedWord
+            GOTO : GuessNextWord
+
+    if userInputWordsLen != 9 :
+        # wrong number of words
+        Name Speak: Gamon,"I'm sorry {userName} I heard the wrong number of words."
+        Name Speak: Gamon,"I heard {userInputWords}"
+        Name Speak: Gamon,"Please try again."
+        GOTO : GuessNextWord
+
+    if userInputWords[2:] != chosenPhrase
+        Name Speak: Gamon,"I heard {userInputWords}"
+        Name Speak: Gamon,"I'm sorry {userName} that's not the popular phrase I'm thinking of."
+        Name Speak: Gamon,"Please try again."
+        GOTO : GuessNextWord
+
+    Name Speak: Gamon, "Yay {userName} userInputWords[2:] is correct."
+    Name Speak: Gamon,"Game Over! Thank you {userName} for playing with me"
+    Name Speak: Gamon,"Let's play again"
+    GOTO : ChooseNewPhrase
+
+
+### SYSTEM ALERT PHRASES
+
+## Did user ask for "help" 
+if {askReturnValue} !IN {alertsPhraseList[*]}:
+    ## Not an emergency alert, check for secondary (in progress)
+    if {enableNeonApps}:
+        ## if {askReturnValue} CONTAINS {inProgressList[*]}:
+        if {askReturnValue} STARTSWITH {inProgressList[*]}:
+            Case: 
+                # inProgressList = "what time is it", "Remind me to", "Play", "Record this", "Send an email", "Send a text"
+
+            Name Speak: Gamon,"I'm sorry {userName} that is under construction."
+    ## Not a Gamon/Alert/Neon activation phrase, listen again
+    GOTO : WaitForAlertPhrase
+
+# Possible EMERGENCY
+
+Name Speak: Gamon,"The Emergency Assistant heard an emergency alert. I heard {askReturnValue}"
+Reconvey : askReturnValue
+Name Speak: Gamon,"</speak>PA 6 did reconvey"
+
+@PromptConfirmHelp
+
+askPrompt = "Please say just kidding if this is not an emergency"
+returnLabel = ConfirmHelp
+GOTO : ASK
+@ConfirmHelp
+
+## Did user REALLY ask for "help"? 
+if {askReturnValue} == "":
+    Name Speak: Gamon,"The Emergency Assistant heard nothing. I heard"
+    Reconvey : askReturnValue
+    Name Speak: Gamon,"</speak>PA 8 did reconvey of nothing heard"
+
+    ## PA heard nothing after emergency request .. if second time then this is an emergency
+    if {heardSilence} == {True} :
+        GOTO : Emergency
+    heardSilence = {True}
+    ## Increase volume and speak slowly
+    Name Speak: Gamon,"<prosody volume='+100%' rate='slow'>{userName}! I need to hear from you! Is this an emergency?</prosody>"
+    GOTO : PromptConfirmHelp
+if {askReturnValue} CONTAINS "just kidding", "never mind", "not an emergency":
+    Name Speak: Gamon,"The Emergency Assistant heard you say this is not an emergency. I heard"
+    Reconvey : askReturnValue
+    ### Name Speak: Gamon,"</speak>Did reconvey of jk"
+
+    ## User said jk so restart listening
+    Name Speak: Gamon,"Please say help again if this is an emergency."
+    Python: falseAlarmCount = {falseAlarmCount} + 1
+    GOTO : WaitForAlertPhrase
+
+# EMERGENCY
+
+@Emergency
+
+Name Speak: Gamon,"<prosody volume='+100%' rate='normal'>{userName}! Needs! Help! This is an EMERGENCY</prosody>"
+
+Name Speak: Gamon,"The Emergency Assistant would now send an emergency alert, sound an alarm, keep engaged with the user, and send updated alerts to the caregiver."
+
+Name Speak: Gamon,"Gamon test completed. Say start again to start again?"
+voice_input{askReturnValue}
+if {askReturnValue} == "start again":
+    Name Speak: Gamon,"</speak> Gamon is restarting. Thanks again."
+    GOTO : StartUp
+
+Name Speak: Gamon,"Gamon exiting. Thanks again for helping test my skills."
+exit
+
+# ========== Subroutines
+
+@ASK
+# The ASK subroutine speaks the askPrompt and waits for a response. If the response is a command to Gamon to perform an action, then the request is effected and Gamon continues waiting for a response, otherwise, the response is returned to the caller in the askReturnValue. 
+# Input parameters: askPrompt, returnLabel and timeOutReturnLabel
+# Result parameter: askReturnValue
+
+### Name Speak: Gamon,"Ask 1 Starting"
+if {askPrompt}:
+    Name Speak: Gamon," {askPrompt} "
+### Name Speak: Gamon,"Ask 2 Starting ask subroutine"
+voice_input(askReturnValue)
+### Name Speak: Gamon,"Ask 3 got input"
+if {askReturnValue} IN {exitList[*]}:
+    Name Speak: Gamon,"Say yes to confirm exiting Gamon, the Neon Word Game Assistant"
+    voice_input(askReturnValue)
+    if {askReturnValue} IN {yesList[*]}:
+        Name Speak: Gamon,"Gamon , the Neon Word Game Assistant, signing off"
+        exit
+    else
+        GOTO : ASK
+### Name Speak: Gamon,"Ask 4 not cancel command {askReturnValue}"
+if {askReturnValue} IN {heyList[*]}:
+    Name Speak: Gamon,"<prosody {customProsody}> {userName}, Gamon the Word Game Assistant demo here. I'm listening all the time but I don't <phoneme alphabet= "x-sampa" ph= "rikord">record</phoneme> everything you say. I only make recordings of calls for help or if you say emergency. </prosody>"
+# Note - Disambiguation for the pronunciations of "record": <phoneme alphabet= "x-sampa" ph= "rikord">record</phoneme> Verb as in "I record everything you say" vs. Noun as in "Make a record of the conversation".
+    Name Speak: Gamon,"The time is"
+    Execute : "Neon what time is it"
+    if {falseAlarmCount} != 0:
+        Name Speak: Gamon,"The false alarm count is {falseAlarmCount}!"
+    GOTO : ASK
+### Name Speak: Gamon,"Ask 5 About to return to {returnLabel}"
+GOTO: {returnLabel}
+
+
+@TIMEOUT
+GOTO: {timeoutReturnLabel}[/collapse]
+[collapsed][collapsed title=Hello World Input:]
+Script: "Hello World Input"
 Variable: input
 Neon speak: "Hello World. Say anything or exit"
 voice_input(input)
 Neon speak: "you said {input}"
-Exit</p>
-</div>
-<button type="button" class="collapsible">Jody</button>
-<div class="content">
-  <p>Script: "Jody"
+Exit[/collapse]
+[collapsed][collapsed title=Jody:]
+Script: "Jody"
 Language: en-au, female
 Variable: name
 Variable: more
@@ -2055,22 +2463,18 @@ voice_input(name)
 Name Speak: Jody, "hi {name}"
 Name Speak: Jody, " I am knowledgeable about the weather. You can ask me questions like what is the weather in Seattle - or any world location"
 Name Speak: Jody, "If your microphone and speakers are enabled you can ask me questions out loud, and hear my answers, otherwise you can type your questions in the box, after this start up exits."
-Exit</p>
-</div>
-<button type="button" class="collapsible">Language Test</button>
-<div class="content">
-  <p>Script: Language test
+Exit[/collapse]
+[collapsed][collapsed title=Language Test:]
+Script: Language test
 Language: en-us, male
 Neon speak: "I am an American Male"
 Language: female, en-au
 Neon speak: "Now I am Australian Female"
 Language: en-gb
 Neon speak: Now I am British in your preferred gender
-Exit</p>
-</div>
-<button type="button" class="collapsible">Manuel</button>
-<div class="content">
-  <p>Script: "Manuel"
+Exit[/collapse]
+[collapsed][collapsed title=Manuel:]
+Script: "Manuel"
 Language: es-MX, male
 Variable: name
 Variable: more
@@ -2080,11 +2484,9 @@ voice_input(name)
 Name Speak: Manuel, "hi {name}"
 Name Speak: Manuel, " I am good at Spanish. You can say things like translate strawberry to Spanish, or speak to me in Spanish" 
 Name Speak: Manuel, "If your microphone and speakers are enabled you can ask me questions out loud, and hear my answers. Otherwise you can type your questions in the box, after this start up exits."
-EXIT</p>
-</div>
-<button type="button" class="collapsible">Mycroft Navigator</button>
-<div class="content">
-  <p>Script: "Mycroft Navigator"
+EXIT[/collapse]
+[collapsed][collapsed title=Mycroft Navigator:]
+Script: "Mycroft Navigator"
 # Language: en-us, female
 Variable: options = table_scrape(https://mycroft.ai)
 Variable: chosen
@@ -2099,11 +2501,9 @@ LOOP WN
         Neon speak: "Page not found"
     Neon speak: "What Mycroft web page would you like to see next?"
 LOOP WN END
-Exit</p>
-</div>
-<button type="button" class="collapsible">Neon Ai Android Startup</button>
-<div class="content">
-  <p>Script: "Neon AI Android Startup"
+Exit[/collapse]
+[collapsed][collapsed title=Neon Ai Android Startup:]
+Script: "Neon AI Android Startup"
 Language: en-us, female
 Variable: startup_skill
 Neon speak: "Welcome to Neon AI Scripts. Please choose a script to run when you open the app."
@@ -2111,11 +2511,9 @@ Execute: "tell me my scripts"
 Neon speak: "Which one would you like?"
 voice_input(startup_skill)
 Execute: "set my startup script to {startup_skill}"
-Exit</p>
-</div>
-<button type="button" class="collapsible">Neon Ai Navigator</button>
-<div class="content">
-  <p>Script: "Neon AI Navigator"
+Exit[/collapse]
+[collapsed][collapsed title=Neon Ai Navigator:]
+Script: "Neon AI Navigator"
 Variable: options = table_scrape(https://neon.ai)
 Neon speak: "Please tell me what Neon AI web page you'd like to see. You can say things like {random(options)} or say quit or exit."
 LOOP WN
@@ -2135,11 +2533,9 @@ LOOP WN
         Neon speak: "Tell me another Neon AI web page you'd like to see or say quit."
 LOOP WN END
 Exit
-</p>
-</div>
-<button type="button" class="collapsible">Neongecko Intro</button>
-<div class="content">
-  <p>Script: "Neongecko Intro"
+[/collapse]
+[collapsed][collapsed title=Neongecko Intro:]
+Script: "Neongecko Intro"
 Variable: name
 Variable: more
 Neon Speak: "Welcome to the Neongecko Intro, My name is Neon."
@@ -2148,11 +2544,9 @@ voice_input(name)
 Neon Speak: "hi {name}"
 Neon Speak: "Welcome to Neongecko.com." 
 Neon Speak: "Exiting the Neon Welcome Script. If your microphone and speakers are enabled you can ask me for time, weather, play music, show videos, caffeine contents, etcetera"
-EXIT</p>
-</div>
-<button type="button" class="collapsible">Neongecko Website Demo</button>
-<div class="content">
-  <p>Script: Neongecko Website Demo
+EXIT[/collapse]
+[collapsed][collapsed title=Neongecko Website Demo:]
+Script: Neongecko Website Demo
 Variable: name
 Variable: more
 Neon Speak: "Welcome to the Neongecko Intro, My name is Neon."
@@ -2199,11 +2593,9 @@ LOOP Q1
 LOOP Q1 END
 @say_goodbye
 Neon Speak: "Goodbye"
-Exit</p>
-</div>
-<button type="button" class="collapsible">Pat Test Andrii</button>
-<div class="content">
-  <p>Script: "Pat Test Andrii"
+Exit[/collapse]
+[collapsed][collapsed title=Pat Test Andrii:]
+Script: "Pat Test Andrii"
 Language: "en-us male"
 
 # Help I can't get up ..
@@ -2573,11 +2965,9 @@ Goto: {returnLabel}
 @TIMEOUT
 Goto: {timeoutReturnLabel}
 
-</p>
-</div>
-<button type="button" class="collapsible">Patient Assistant</button>
-<div class="content">
-  <p>Script: "Patient Assistant"
+[/collapse]
+[collapsed][collapsed title=Patient Assistant:]
+Script: "Patient Assistant"
 Language: en-us, male
 
 # Set up wait time for patient responses
@@ -2838,11 +3228,9 @@ Goto: {returnLabel}
 
 @TIMEOUT
 Goto: {timeoutReturnLabel}
-</p>
-</div>
-<button type="button" class="collapsible">Subroutine Test</button>
-<div class="content">
-  <p># Subroutine Test
+[/collapse]
+[collapsed][collapsed title=Subroutine Test:]
+# Subroutine Test
 
 Script: "Subroutine Test"
 
@@ -2889,11 +3277,9 @@ if {askInput} IN {heyPattyList[*]}:
 Name Speak : Patty, "About to return to {returnLabel}"
 Goto: {returnLabel}
 
-</p>
-</div>
-<button type="button" class="collapsible">Table Scrape Demo</button>
-<div class="content">
-  <p>Script: "Table Scrape Demo"
+[/collapse]
+[collapsed][collapsed title=Table Scrape Demo:]
+Script: "Table Scrape Demo"
 # TODO: This function has changed
 Variable: options = table_scrape(https://www.neongecko.com/demos)
 Variable: chosen
@@ -2904,19 +3290,15 @@ Neon speak:
     "Okay"
 Execute: "av play closest(chosen,options)"
 Exit
-</p>
-</div>
-<button type="button" class="collapsible">Test Email</button>
-<div class="content">
-  <p>Script: Test Email
+[/collapse]
+[collapsed][collapsed title=Test Email:]
+Script: Test Email
 Variable: body = "Test email body\nnewline"
 Neon speak: "</speak>sending email"
 Email: "My Email Title", body
-Exit</p>
-</div>
-<button type="button" class="collapsible">Test Neon Demo</button>
-<div class="content">
-  <p>Script: "Test Neon Demo"
+Exit[/collapse]
+[collapsed][collapsed title=Test Neon Demo:]
+Script: "Test Neon Demo"
 Variable: test_set
 Neon speak:
     "Please select your test preference. You can choose from the following demos: 'personal' for profile setup"
@@ -3049,11 +3431,9 @@ Case: {test_set}
         Execute: " i want [you] to shutdown"
         Execute: "what is my current software version"
 
-Exit</p>
-</div>
-<button type="button" class="collapsible">Test Ssml</button>
-<div class="content">
-  <p>Script: "Test SSML"
+Exit[/collapse]
+[collapsed][collapsed title=Test Ssml:]
+Script: "Test SSML"
 
 Variable: input
 Neon Speak: "Hi. I can put a <break time="300ms"/>break in my speech, or I can <emphasis level="strong">emphasize</emphasis> a word."
@@ -3067,21 +3447,17 @@ Name Speak: Nobody, "Or I can speak as someone else."
 Name Speak: Fast Famale, "<prosody volume="+6dB" rate="x-fast" pitch="x-high">I can be loud, fast, and high</prosody>"
 Name Speak: Slow Male, "<prosody volume="-2dB" rate="x-slow" pitch="x-low">I can be quiet, slow, and deep</prosody>"
 
-Exit</p>
-</div>
-<button type="button" class="collapsible">Test Upload</button>
-<div class="content">
-  <p>Script: Test Upload
+Exit[/collapse]
+[collapsed][collapsed title=Test Upload:]
+Script: Test Upload
 Author: Daniel McKnight 
 Description: This is only a test
 # Comment line 
 
 # Above was a newline 
-Exit</p>
-</div>
-<button type="button" class="collapsible">User Register Demo</button>
-<div class="content">
-  <p>Script: "User Register Demo"
+Exit[/collapse]
+[collapsed][collapsed title=User Register Demo:]
+Script: "User Register Demo"
 Variable: full_name
 Variable: first_name
 Variable: last_name
@@ -3118,11 +3494,9 @@ Neon speak: "Please tell me your full name or say exit"
             Execute: "neon my last name is {last_name}"
             Execute: "neon tell me my last name"
             LOOP change_name END
-Exit</p>
-</div>
-<button type="button" class="collapsible">Variable Demo</button>
-<div class="content">
-  <p>Script: "Variable Demo"
+Exit[/collapse]
+[collapsed][collapsed title=Variable Demo:]
+Script: "Variable Demo"
 Language: en-au, female
 Variable: location
 Variable: info_type = time, weather, population
@@ -3134,11 +3508,9 @@ Neon speak:
 voice_input(location)
 Execute: "What is the {info_type} in {location}"
 Exit
-</p>
-</div>
-<button type="button" class="collapsible">Weather Time Population Goto</button>
-<div class="content">
-  <p>Script: "Weather Time Population Goto"
+[/collapse]
+[collapsed][collapsed title=Weather Time Population Goto:]
+Script: "Weather Time Population Goto"
 Language: en-au, female
 Synonym: "Demo WTP Goto"
 Variable: response
@@ -3190,11 +3562,9 @@ Case (response):
                 Execute: "What is the population of Bombay"
             "S or Seattle"
                 Execute: "What is the population of Seattle"
-Exit</p>
-</div>
-<button type="button" class="collapsible">Website Navigator</button>
-<div class="content">
-  <p>Script: "Website Navigator"
+Exit[/collapse]
+[collapsed][collapsed title=Website Navigator:]
+Script: "Website Navigator"
 # Synonym: "demo website navigator"
 # Synonym: "website navigator demo"
 # Language: "English American Female"
@@ -3220,11 +3590,9 @@ LOOP WN
         Neon speak: "Tell me another Neon AI web page you'd like to see or say quit."
 LOOP WN END
 Exit
-</p>
-</div>
-<button type="button" class="collapsible">Website Navigator Timeout</button>
-<div class="content">
-  <p>Script: "Website Navigator Timeout"
+[/collapse]
+[collapsed][collapsed title=Website Navigator Timeout:]
+Script: "Website Navigator Timeout"
 Variable: options = table_scrape(https://neongecko.com)
 Variable: chosen
 Timeout: 10, instructions
@@ -3248,11 +3616,9 @@ LOOP WN
         Neon speak: "Tell me another Neon AI web page you'd like to see or say quit."
 LOOP WN END
 Exit
-</p>
-</div>
-<button type="button" class="collapsible">Welcome</button>
-<div class="content">
-  <p>Script: "Welcome"
+[/collapse]
+[collapsed][collapsed title=Welcome:]
+Script: "Welcome"
 Variable: name
 Variable: like
 Variable: location
@@ -3273,11 +3639,9 @@ voice_input(question)
 if {question} == "exit":
     Exit
 Execute: "{question}"
-Exit</p>
-</div>
-<button type="button" class="collapsible">Welcome Loops Demo</button>
-<div class="content">
-  <p>Script: "Welcome Loops Demo"
+Exit[/collapse]
+[collapsed][collapsed title=Welcome Loops Demo:]
+Script: "Welcome Loops Demo"
 Variable: name
 Variable: like
 Variable: location
@@ -3300,11 +3664,9 @@ LOOP Q1
     voice_input(question)
     #Execute: "{question}"
 LOOP Q1 END
-Exit</p>
-</div>
-<button type="button" class="collapsible">Welcome Neon Demo</button>
-<div class="content">
-  <p>Script: "Welcome Neon Demo"
+Exit[/collapse]
+[collapsed][collapsed title=Welcome Neon Demo:]
+Script: "Welcome Neon Demo"
 #Language: "English British Male"
 Language: en-gb, male
 Variable: full_name
@@ -3343,11 +3705,9 @@ voice_input(response)
             voice_input(last_name)
             Execute: "neon my last name is {last_name}"
             Execute: "neon tell me my last name"
-Exit</p>
-</div>
-<button type="button" class="collapsible">Wtp Demo</button>
-<div class="content">
-  <p>Script: "WTP Demo"
+Exit[/collapse]
+[collapsed][collapsed title=Wtp Demo:]
+Script: "WTP Demo"
 Language: en-au, female
 Synonym: "Demo WTP"
 Synonym: "WTP Demo"
@@ -3397,35 +3757,15 @@ Case (response):
                 Execute: "What is the population of Bombay"
             "S or Seattle"
                 Execute: "What is the population of Seattle"
-Exit</p>
-</div>
-<button type="button" class="collapsible">Xyz</button>
-<div class="content">
-  <p>Script: "xyz"
+Exit[/collapse]
+[collapsed][collapsed title=Xyz:]
+Script: "xyz"
 Neon speak: "Hello"
 Neon speak: "Thank you for running the xyz script. Would you like to hear a joke"
 Execute: "tell me a joke"
 Neon speak: "Here is the current time"
 Execute: "what is the time"
-Exit</p>
-</div>
-
-<script>
-var coll = document.getElementsByClassName("collapsible");
-var i;
-
-for (i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var content = this.nextElementSibling;
-    if (content.style.display === "block") {
-      content.style.display = "none";
-    } else {
-      content.style.display = "block";
-    }
-  });
-}
-</script>
+Exit[/collapse]
 
 </body>
 </html>
