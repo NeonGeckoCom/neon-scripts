@@ -16,7 +16,7 @@ Neon speak: "Please tell me your full name or say exit"
     LOOP change_name
     Neon speak: "Is that correct? Say yes, no, change first name, change last name or exit"
     voice_input(selection)
-    Case: {selection}
+    Case(selection):
         "yes"
             Neon speak: "Okay"
             Execute: "exit"

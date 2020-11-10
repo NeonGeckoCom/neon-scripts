@@ -353,7 +353,7 @@ if {askReturnValue} !IN {alertsPhraseList[*]}:
     if {enableNeonApps}:
         ## if {askReturnValue} CONTAINS {inProgressList[*]}:
         if {askReturnValue} STARTSWITH {inProgressList[*]}:
-            Case: 
+            Case():
                 # inProgressList = "what time is it", "Remind me to", "Play", "Record this", "Send an email", "Send a text"
 
             Name Speak: Gamon,"I'm sorry {userName} that is under construction."
