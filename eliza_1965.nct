@@ -97,16 +97,16 @@ Variable: key_sub = "* [sorry] for {sorry_1}" "Please don't apologize about {sor
     "[quit]" "{final}",
     "*" "I'm not sure I understand you fully." "Please go on." " What do you mean by *?" "Do you feel strongly about discussing such things?"
 
-Name speak: Eliza: {initial}
+Name speak: Eliza, {initial}
 
 LOOP pre
-    voice_input {input}
+    voice_input(input)
     Set: user_speech = {input}
-    sub_values{input, input_sub}
-    sub_key{input, key_sub}
+    sub_values(input, input_sub)
+    sub_key(input, key_sub)
 
-    Name speak: Eliza: {input}
-    if {user_speech} in {quit}:
+    Name speak: Eliza, {input}
+    if {user_speech} IN {quit}:
         Exit
 LOOP pre END
 

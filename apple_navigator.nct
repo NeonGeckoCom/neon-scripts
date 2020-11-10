@@ -6,14 +6,14 @@ Neon speak: "Please tell me what apple.com web page you'd like to see. You can s
 LOOP WN
 ....voice_input(chosen)
 ....# Neon speak: "navigating to {chosen}"
-....if {chosen} == "quit":
+....If {chosen} == "quit":
 ........Neon speak: "say pause to turn off the mic or say exit to close the window."
 ........voice_input(chosen)
-........if {chosen} == "pause":
+........If {chosen} == "pause":
 ............# execute skill to turn off mic
 ............Execute: "neon mute microphone"
 ....else:
-........if closest(chosen,options):
+........If closest(chosen,options):
 ............Execute: "neon browse to {closest(chosen,options)}"
 ........else:
 ............Neon speak: "Page not found"
