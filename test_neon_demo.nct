@@ -17,7 +17,7 @@ Neon speak:
     "'dialog', or "
     "'control' group tests."
 voice_input(test_set)
-Case: {test_set}
+Case(test_set):
     "personal"
         Execute:
             "neon my name is Joshua Test"
