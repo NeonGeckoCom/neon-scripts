@@ -1,16 +1,13 @@
 # This workflow will assign NeonDevs to review any PR into the scripts repository
 
 name: Request PR Review
-on:
-  pull_request:
-    types: [opened, reopened]
+on: pull_request
 
 jobs:
   assign_review:
     runs-on: ubuntu-latest
     steps:
       - name: assign-review-action
-        uses: delivery-much/actions-assigner@v1.0.2
+        uses: kentaro-m/auto-assign-action@v1.1.2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          team-reviewers: NeonReviewers
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
