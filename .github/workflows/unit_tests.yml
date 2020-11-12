@@ -1,0 +1,29 @@
+# This workflow will run unit tests
+
+name: Run Unit Tests
+on:
+  push:
+    branches:
+      - dev
+      - cert
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up python 3.6
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.6
+      - name: Test with pytest
+        run: |
+          pip install pytest pytest-timeout pytest-cov
+          pip install git+https://neondemo:${{secrets.demo_user_password}}@github.com/neongeckocom/neon-script-parser
+          pytest tests/test_scripts.py --doctest-modules --junitxml=tests/test-results.xml
+      - name: Upload pytest test results
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-results
+          path: tests/test-results.xml
