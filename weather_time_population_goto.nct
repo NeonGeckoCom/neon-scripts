@@ -7,14 +7,14 @@ Neon speak:
     "Say 2 or World Weather for world weather"
     "Say 3 or World Populations for world populations"
 voice_input(response)
-Case (response):
+Case(response):
     "1 or World Times"
         Neon speak:
             "Say A or Athens for Athens's time"
             "Say B or Bombay for Bombay's time"
             "Say S or Seattle for Seattle's time"
         voice_input(response)
-        Case (response):
+        Case(response):
             "A or Athens"
                 Execute: "What time is it in Athens"
                 Goto: athens_weather
@@ -28,11 +28,11 @@ Case (response):
             "Say B or Bombay for the weather in Bombay"
             "Say S or Seattle for the weather in Seattle"
         voice_input(response)
-        Case (response):
+        Case(response):
             "A or Athens"
                 @athens_weather
                 Execute: "What is the weather in Athens"
-                Goto: 48
+                Goto: 50
             "B or Bombay"
                 Execute: "What is the weather in Bombay"
             "S or Seattle"
@@ -43,7 +43,7 @@ Case (response):
             "Say B or Bombay for Bombay's population"
             "Say S or Seattle for Seattle's population"
         voice_input(response)
-        Case (response):
+        Case(response):
             "A or Athens"
                 Execute: "What is the population of Athens"
             "B or Bombay"

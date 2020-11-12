@@ -8,7 +8,7 @@ LOOP WW
         "Say S or Seattle for the weather in Seattle"
         "Say exit to exit"
     voice_input(location)
-    Case (location):
+    Case(location):
         "A or Athens"
             Execute: "What is the weather in Athens"
             Neon speak: "about to repeat A"
@@ -17,7 +17,7 @@ LOOP WW
             Neon speak:
                 "say 10 day or 5 day forecast"
             voice_input(forecast)
-            Case (forecast):
+            Case(forecast):
                 "10 day or 10"
                     Execute: "What is the 10 day forecast for Bombay"
                 "5 day or 5"

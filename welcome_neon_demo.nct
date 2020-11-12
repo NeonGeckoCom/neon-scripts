@@ -22,7 +22,7 @@ if profile(user.last_name):
 Neon speak:
     "Is that correct? Say yes, change first name, change last name or exit"
 voice_input(response)
-    Case: {response}
+    Case(response):
         "yes"
             Exit
         "change first name"
