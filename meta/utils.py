@@ -16,26 +16,24 @@
 # Specialized conversational reconveyance options from Conversation Processing Intelligence Corp.
 # US Patents 2008-2020: US7424516, US20140161250, US20140177813, US8638908, US8068604, US8553852, US10530923, US10530924
 # China Patent: CN102017585  -  Europe Patent: EU2156652  -  Patents Pending
-
-import logging
-import unittest
 import os
 
-from logging import log
 from script_parser import ScriptParser
 
 
-class TestCompileScripts(unittest.TestCase):
-    def test_scripts_compile(self):
-        parser = ScriptParser()
-        script_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
-        for file in os.listdir(script_dir):
-            log(logging.DEBUG, file)
-            if file.endswith(".nct"):
-                print(file)
-                s = parser.parse_script_to_dict(os.path.join(script_dir, file))
-                self.assertIsInstance(s, dict)
+def update_all_parsed_scripts():
+    parser = ScriptParser()
+    script_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+    for txt in os.listdir(script_dir):
+        if txt.endswith("nct"):
+            file = os.path.join(script_dir, txt)
+            meta = {}
+            # if os.path.isfile(file.replace(".nct", parser.file_ext)):
+            #     meta = parser.load_script_parser(file.replace(".nct", parser.file_ext)).get("meta", {})
+
+            parser.parse_script_to_file(file, meta=meta)
 
 
-if __name__ == '__main__':
-    unittest.main()
+if __name__ == "__main__":
+    update_all_parsed_scripts()
+
