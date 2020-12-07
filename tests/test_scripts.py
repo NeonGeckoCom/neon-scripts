@@ -69,8 +69,12 @@ class TestCompileScripts(unittest.TestCase):
 
                     self.assertIn("command", line)
                     self.assertIn(line["command"], valid_opts)
+
                     self.assertIn("indent", line)
                     self.assertIsInstance(line["indent"], int)
+
+                    self.assertIn("parent_case_indents", line)
+                    self.assertIsInstance(line["parent_case_indents"], list)
 
                     self.assertIsInstance(line.get("data", {}), dict)
 
