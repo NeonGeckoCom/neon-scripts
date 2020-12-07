@@ -31,10 +31,48 @@ class TestCompileScripts(unittest.TestCase):
         script_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
         for file in os.listdir(script_dir):
             log(logging.DEBUG, file)
-            if file.endswith(".nct"):
-                print(file)
+            if str(file).endswith(".nct"):
                 s = parser.parse_script_to_dict(os.path.join(script_dir, file))
                 self.assertIsInstance(s, dict)
+
+                self.assertIsInstance(s["formatted_script"], list)
+                self.assertIsInstance(s["language"], dict)
+                self.assertIsInstance(s["variables"], dict)
+                self.assertIsInstance(s["loops"], dict)
+                self.assertIsInstance(s["tags"], dict)
+                self.assertIsInstance(s["timeout"], int)
+
+                self.assertIn("timeout_action", s)
+                if s["timeout_action"]:
+                    self.assertIsInstance(s["timeout_action"], str)
+
+                self.assertIsInstance(s["synonyms"], list)
+                self.assertIsInstance(s["claps"], dict)
+                self.assertIsInstance(s["meta"], dict)
+
+    def test_load_compiled_scripts(self):
+        parser = ScriptParser()
+        valid_opts = list(parser._pre_parser_options.keys())
+        valid_opts.append(None)
+        script_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+        for file in os.listdir(script_dir):
+            log(logging.DEBUG, file)
+            if str(file).endswith(".ncs"):
+                s = parser.load_script_file(os.path.join(script_dir, file))
+                self.assertIsInstance(s[0], list)
+
+                for line in s[0]:
+                    self.assertIsInstance(line, dict)
+
+                    self.assertIn("text", line)
+                    self.assertIsInstance(line["text"], str)
+
+                    self.assertIn("command", line)
+                    self.assertIn(line["command"], valid_opts)
+                    self.assertIn("indent", line)
+                    self.assertIsInstance(line["indent"], int)
+
+                    self.assertIsInstance(line.get("data", {}), dict)
 
 
 if __name__ == '__main__':
