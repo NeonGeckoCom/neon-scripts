@@ -1,4 +1,4 @@
-Script: "Pat Test Andrii"
+Script: "Pat Master"
 Language: "en-us male"
 
 # Help I can't get up ..
@@ -41,7 +41,7 @@ Timeout: 30, TIMEOUT
 
 @AnnounceVersion
 
-Name Speak: Pat, "Neon Patient Assistant Application Demonstration Version 2020 07 09 18:22 </speak> Testing"
+Name Speak: Pat, "Neon Patient Assistant Application Demonstration Version 2020 07 09 18:22 <speak> <prosody volume='soft'>Testing </prosody></speak>"
 
 Variable: True = 1
 Variable: False = 0
@@ -135,7 +135,7 @@ Name Speak: Pat, "Hi {userName}. I'm Pat the demonstration conversational patien
 Name Speak: Pat, "I am an artificial intelligence personal assistant. I'm augmented with Neon Gecko open source code and CPI Corp patented technology."
 Name Speak: Pat,  "Neon AI makes the Patient Assistant application to enable patients to alert their caregivers to emergencies and other needs, and to get simple information."
 Name Speak: Pat,  "As your automated patient assistant I listen for calls for help and send alerts to the patient care administrator."
-Name Speak: Pat,  "For example, you can say help, or I fell. Another thing you can say is what time is it .. </speak> In the future you will be able to play your favorite music, turn the lights on or off, and even ask to send a text message .. And if you don't want to call me Pat, someday you will be able to change my name."
+Name Speak: Pat,  "For example, you can say help, or I fell. Another thing you can say is what time is it. In the future you will be able to play your favorite music, turn the lights on or off, and even ask to send a text message .. And if you don't want to call me Pat, someday you will be able to change my name."
 
 # Customize
 
@@ -158,7 +158,7 @@ voice_input(customizeSettings)
 if {customizeSettings} !IN {yesList[*]}:
     Goto: BeginAssistant
 
-Name Speak: Pat, "Hi {userName}. You can customize the voice for the Neon demonstration conversational patient assistant. You can say no change, or say female, male, normal, fast, slow, American, British or Australian. </speak> In the future you will be able to set up information for the administrator, staff members and the patient, and change my name and other PAT system settings."
+Name Speak: Pat, "Hi {userName}. You can customize the voice for the Neon demonstration conversational patient assistant. You can say no change, or say female, male, normal, fast, slow, American, British or Australian. In the future you will be able to set up information for the administrator, staff members and the patient, and change my name and other PAT system settings."
 
 @ReAskCustomize
 
@@ -223,7 +223,7 @@ if {customizeSettings} IN {noList[*]}:
 @BeginAssistant
 
 timeoutReturnLabel = WaitForAlertPhrase
-Name Speak: Pat, "<prosody {customProsody}> Your demonstration patient assistant has signed in. If you want to know if I am listening, you can say, hey Pat, or, Pat are you there. </prosody>"
+Name Speak: Pat, "<speak><prosody {customProsody}> Your demonstration patient assistant has signed in. If you want to know if I am listening, you can say, hey Pat, or, Pat are you there. </prosody></speak>"
 
 # Wait for alert
 
@@ -288,8 +288,8 @@ if {askReturnValue} !IN {alertsPhraseList[*]}:
 # Possible EMERGENCY
 
 Name Speak: Pat, "Pat the Patient Assistant heard an emergency alert. I heard {askReturnValue}"
-# Reconvey : askReturnValue
-Name Speak: Pat, "</speak>PA 6 did reconvey"
+Reconvey : askReturnValue
+# Name Speak: Pat, "</speak>PA 6 did reconvey"
 
 @PromptConfirmHelp
 
@@ -328,14 +328,14 @@ else:
 
 @Emergency
 
-Name Speak: Pat, "<prosody volume='+100%' rate='normal'>{userName}! Needs! Help! This is an EMERGENCY</prosody>"
+Name Speak: Pat, "<speak><prosody volume='+2dB' rate='normal'>{userName}! Needs! Help! This is an </prosody> <prosody volume='+3dB'>EMERGENCY</prosody></speak>"
 
 Name Speak: Pat, "Pat the Patient Assistant would now send an emergency alert, sound an alarm, keep engaged with the patient, and send updated alerts to the caregiver."
 
 Name Speak: Pat, "Pat test completed. Say start again to start again?"
 voice_input(askReturnValue)
 if {askReturnValue} == "start again":
-    Name Speak: Pat, "</speak>Pat is restarting. Thanks again."
+    Name Speak: Pat, "Pat is restarting. Thanks again."
     Goto: StartUp
 
 Name Speak: Pat, "Pat exiting. Thanks again for helping test my skills."
@@ -364,7 +364,7 @@ if {askReturnValue} IN {exitList[*]}:
         goto: WaitForAlertPhrase
 ### Name Speak: Pat, "Ask 4 not cancel command {askReturnValue}"
 if {askReturnValue} IN {heyPatList[*]}:
-    Name Speak: Pat, "<prosody {customProsody}> {userName}, Pat the AI Patient Assistant demo here. I'm listening all the time but I don't <phoneme alphabet='x-sampa' ph='rikord'>record</phoneme> everything you say. I only make recordings of calls for help or in an emergency. </prosody>"
+    Name Speak: Pat, "<speak><prosody {customProsody}> {userName}, Pat the AI Patient Assistant demo here. I'm listening all the time but I don't <phoneme alphabet='x-sampa' ph='rikord'>record</phoneme> everything you say. I only make recordings of calls for help or in an emergency. </prosody></speak>"
     ### Note - Disambiguation for the pronunciations of "record": <phoneme alphabet="x-sampa" ph="rikord">record</phoneme> Verb as in "I record everything you say" vs. Noun as in "Make a record of the conversation".
     Name Speak: Pat, "The time is"
     Execute : "Neon what time is it"
