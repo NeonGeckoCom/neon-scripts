@@ -55,7 +55,7 @@ Variable: askPrompt
 Variable: returnLabel
 Variable: heardSilence
 Variable: falseAlarmCount
-Variable: askReturnValue = ""
+Variable: askReturnValue
 Variable: userName
 Variable: moreAppInfo
 Variable: customizeSettings

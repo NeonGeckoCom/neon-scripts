@@ -1,7 +1,7 @@
 Script: "Apple Navigator"
 Author: Neongecko
 Variable: options = table_scrape(https://apple.com)
-Variable: chosen = ""
+Variable: chosen
 Neon speak: "Please tell me what apple.com web page you'd like to see. You can say things like {random(options)} or say quit or exit."
 LOOP WN
 ....voice_input(chosen)

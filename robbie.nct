@@ -37,6 +37,10 @@ Variable: covidComorbiditiesCount
 Variable: covidNursingHome
 Variable: covidCareGiver
 
+Variable: moreAppInfo
+Variable: userInput
+Variable: askReturnValue
+
 Variable: True = 1
 Variable: False = 0
 
