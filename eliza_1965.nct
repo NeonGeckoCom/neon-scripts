@@ -1,7 +1,7 @@
 Script: Eliza 1965
 Language: "en-GB female"
 
-Variable: input = ""
+Variable: input
 Variable: split_input
 Synonym: Run Eliza
 Synonym: Talk to Eliza
