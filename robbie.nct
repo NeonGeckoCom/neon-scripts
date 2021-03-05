@@ -1,4 +1,4 @@
-Script: "Covid 19 Audio"
+Script: "Robbie"
 Language: en-us, male
 @restartCovidScreening
 
@@ -37,6 +37,10 @@ Variable: covidComorbiditiesCount
 Variable: covidNursingHome
 Variable: covidCareGiver
 
+Variable: moreAppInfo
+Variable: userInput
+Variable: askReturnValue
+
 Variable: True = 1
 Variable: False = 0
 
@@ -72,7 +76,7 @@ voice_input(moreAppInfo)
 #if {moreAppInfo} !IN {yesNoList[*]}:
 #    Goto: promptMoreAppInfo
 #if {moreAppInfo} IN {noList[*]}:
-If {moreAppInfo} IN {noList[*]}:
+If {moreAppInfo} IN {noList}:
     Goto: BeginScreening
 Name Speak: "Robbie", "The Neon conversational demonstration Covid-19 screening application is based on the Center for Disease Control and Prevention recommendations for the Coronavirus Disease 2019 Telephone Response Guide. The Covid-19 screening script is available at CDC dot gov website. </speak>https://www.cdc.gov/coronavirus/2019-ncov/hcp/phone-guide/ "
 
@@ -85,11 +89,11 @@ Name Reconvey: "Robbie", "In response to screening questions you can say details
 @promptUserRef
 Name Reconvey: "Robbie", "Are you asking for help for yourself, or for someone else?"
 voice_input(covidUserRef)
-If {covidUserRef} IN {detailsList[*]}:
+If {covidUserRef} IN {detailsList}:
     Name Speak: "Robbie", "For record keeping, we need to keep track of who we interact with."
     Goto: promptUserRef
 #If {covidUserRef} == "myself":
-If {covidUserRef} IN {userSelfRefsList[*]}:
+If {covidUserRef} IN {userSelfRefsList}:
     userRef1 = "have you"
     userRef2 = "are you"
     userRef3 = "do you"
@@ -97,7 +101,7 @@ If {covidUserRef} IN {userSelfRefsList[*]}:
     userRef2C = "Are you"
     userRef3C = "Do you"
 else:
-    If {covidUserRef} IN {userElseRefsList[*]}:
+    If {covidUserRef} IN {userElseRefsList}:
         userRef1 = "has the person you are calling about"
         userRef2 = "is the person for whom you are calling"
         userRef3 = "does the person you are calling about"
@@ -119,7 +123,7 @@ Name Reconvey: "Robbie", "Got it {userName}.", "Got it"
 Name Reconvey: "Robbie", "This audio guide is for people who are ill"
 Name Reconvey: "Robbie", "Are you ill of contacting on behalf of someone who is ill?"
 
-# "Are you ill (or contacting on behalf of someone who is ill)?" 
+# "Are you ill (or contacting on behalf of someone who is ill)?"
 voice_input(covidIll)
 If {covidIll} IN {detailsList[*]}:
     Name Reconvey: "Robbie", "We are demonstrating CDC's Covid-19 symptom screening for people who feel ill."
@@ -129,7 +133,7 @@ If {covidIll} IN {detailsList[*]}:
 If {covidIll} IN {noList[*]}:
     Name Speak: "Robbie", "You're not symptomatic of Covid-19 but if you are concerned you have Covid-19 infection you should contact your care advisor."
     Name Speak: "Robbie", "Option for additional information on Covid-19 symptoms are in progress."
-    Goto: A-noSymptoms 
+    Goto: A-noSymptoms
 # TODO: This could do something other than run exit, continue prompting? Ask to start over? Ask to check other symptoms?
     # Exit - Only for sick people
 else:
@@ -149,7 +153,7 @@ If {covidAge} IN {detailsList[*]}:
     Name Speak: "Robbie", "This demonstration of conversational Covid-19 symptom screening is for people over the age of 5. Thank you for helping test the Neon Covid-19 screener."
     Goto: promptAge
 If {covidAge} < 5:
-    Goto: C-lessThanFive 
+    Goto: C-lessThanFive
 else:
     If {covidAge} >= 5:
         Goto: promptLifeThreatening
@@ -164,7 +168,7 @@ else:
 Name Speak: "Robbie", "{userRef3C} have a life-threatening emergency medical condition? Say details for details."
 voice_input(covidLifeThreat)
 If {covidLifeThreat} IN {noList[*]}:
-    Goto: promptContact  
+    Goto: promptContact
 else:
     # if {covidLifeThreat} == "details":
     If {covidLifeThreat} IN {detailsList[*]}:
@@ -192,14 +196,14 @@ If {covidContact} IN {detailsList[*]}:
     Name Speak: "Robbie", "It is important for record keeping to keep track of known contacts to people or places that expose them to Covid-19. Thank you for helping test the Neon Covid-19 screener."
     Goto: promptContact
 If {covidContact} IN {noList[*]}:
-    covidContact = {False}  
+    covidContact = {False}
 else:
     If {covidContact} !IN {yesList[*]}:
         Goto: promptContact
-    covidContact = {True} 
+    covidContact = {True}
 
 
-# SYMPTOMS 
+# SYMPTOMS
 
 
 @promptFever
@@ -209,12 +213,12 @@ if {covidFever} IN {detailsList[*]}:
     Name Speak: "Robbie", "People with a fever over 100.4, and trouble breathing, persistent pain or pressure in the chest, bluish lips or face, or new confusion or fainting, should immediately seek emergency medical care, should limit contact with others and be tested for Covid-19. For fever-reducing medications acetaminophen is recommended (for example Tylenol). Thank you for helping test the Neon Covid-19 screener."
     Goto: promptFever
 if {covidFever} IN {noList[*]}:
-    covidFever = {False}  
+    covidFever = {False}
 else:
     if {covidFever} !IN {yesList[*]}:
         Goto: promptFever
-    covidFever = {True}  
-    # Add - 
+    covidFever = {True}
+    # Add -
     # Ask "Were you able to measure the temperature with a thermometer?"
     # Yes: Ask "What was the temperature and when was it measured?"
     # If No: Ask "Are you/they experiencing shaking, chills, or sweating? Do you/they feel very warm to the touch?"
@@ -223,7 +227,7 @@ else:
 # Details: WHO recommends acetaminophen (for example Tylenol). NOT nonsteroidal anti-inflammatory drugs, NSAIDs, for example ibuprofen (like Advil), naproxen (like Aleve), aspirin, and others.
 # Details: Examples of fever-reducing medications include acetaminophen (for example Tylenol) and nonsteroidal anti-inflammatory drugs, or NSAIDs, for example ibuprofen (like Advil), naproxen (like Aleve), aspirin, and others.
 # If Yes: Ask "How long ago was the medication taken?"
- 
+
 @promptBreath
 # TODO: Breath Audio here
 Name Speak: "Robbie", "{userRef3C} have shortness of breath?"
@@ -232,12 +236,12 @@ if {covidBreath} IN {detailsList[*]}:
     Name Speak: "Robbie", "People with trouble breathing and a fever over 100.4, persistent pain or pressure in the chest, bluish lips or face, or new confusion or fainting, should immediately seek emergency medical care, should limit contact with others and be tested for Covid-19. Thank you for helping test the Neon Covid-19 screener."
     Goto: promptBreath
 if {covidBreath} IN {noList[*]}:
-    covidBreath = {False} 
-    covidSevereBreath = {False} 
+    covidBreath = {False}
+    covidSevereBreath = {False}
 else:
     if {covidBreath} !IN {yesList[*]}:
         Goto: promptBreath
-    covidBreath = {True}  
+    covidBreath = {True}
     @promptSevereBreath
     # TODO: Severe Breath Audio here
     Name Speak: "Robbie", "{userRef3C} have severe shortness of breath, such as difficulty talking or walking across the room without stopping to breath, or fainting?"
@@ -261,12 +265,12 @@ if {covidCough} IN {detailsList[*]}:
     Name Speak: "Robbie", "People with a cough, trouble breathing, persistent pain or pressure in the chest, and a fever over 100.4, or bluish lips or face, or new confusion, or fainting, should immediately seek emergency medical care, should limit contact with others and be tested for Covid-19. Thank you for helping test the Neon Covid-19 screener."
     Goto: promptCough
 if {covidCough} IN {noList[*]}:
-    covidCough = {False}  
+    covidCough = {False}
     covidSevereCough = {False}
 else:
     if {covidCough} !IN {yesList[*]}:
         Goto: promptCough
-    covidCough = {True}  
+    covidCough = {True}
     @promptSevereCough
     if {userRef1C} == "Have you":
         Name Reconvey: "Robbie", "Have you coughed up a teaspoon of blood?"
@@ -290,12 +294,12 @@ if {covidBP} IN {detailsList[*]}:
     Name Speak: "Robbie", "People with a symptom of very low blood pressure, such as new confusion or fainting or being too weak to stand, should immediately seek emergency medical care. Thank you for helping test the Neon Covid-19 screener."
     Goto: promptBP
 if {covidBP} IN {noList[*]}:
-    covidBP = {False}  
+    covidBP = {False}
     covidSevereBP = {False}
 else:
     if {covidBP} !IN {yesList[*]}:
         Goto: promptBP
-    covidBP = {True}  
+    covidBP = {True}
     @promptSevereBP
     Name Speak: "Robbie", "{userRef3C} have severe low BP hypotension such as not being able to stand?"
     voice_input(covidSevereBP)
@@ -315,11 +319,11 @@ if {covidNose} IN {detailsList[*]}:
     Name Speak: "Robbie", "It is important for record keeping to keep track of symptoms related to Covid-19. Thank you for helping test the Neon Covid-19 screener."
     Goto: promptNose
 if {covidNose} IN {noList[*]}:
-    covidNose = {False}  
+    covidNose = {False}
 else:
     if {covidNose} !IN {yesList[*]}:
         Goto: promptNose
-    covidNose = {True}  
+    covidNose = {True}
 
 
 @promptThroat
@@ -329,11 +333,11 @@ if {covidThroat} IN {detailsList[*]}:
     Name Speak: "Robbie", "It is important for record keeping to keep track of symptoms related to Covid-19. Thank you for helping test the Neon Covid-19 screener."
     Goto: promptThroat
 if {covidThroat} IN {noList[*]}:
-    covidThroat = {False}  
+    covidThroat = {False}
 else:
     if {covidThroat} !IN {yesList[*]}:
         Goto: promptThroat
-    covidThroat = {True}  
+    covidThroat = {True}
 
 
 @promptMuscle
@@ -343,11 +347,11 @@ if {covidMuscle} IN {detailsList[*]}:
     Name Speak: "Robbie", "It is important for record keeping to keep track of symptoms related to Covid-19. Thank you for helping test the Neon Covid-19 screener."
     Goto: promptMuscle
 if {covidMuscle} IN {noList[*]}:
-    covidMuscle = {False}  
+    covidMuscle = {False}
 else:
     if {covidMuscle} !IN {yesList[*]}:
         Goto: promptMuscle
-    covidMuscle = {True}  
+    covidMuscle = {True}
 
 
 @promptTaste
@@ -357,11 +361,11 @@ if {covidTaste} IN {detailsList[*]}:
     Name Speak: "Robbie", "It is important for record keeping to keep track of symptoms related to Covid-19. Thank you for helping test the Neon Covid-19 screener."
     Goto: promptTaste
 if {covidTaste} IN {noList[*]}:
-    covidTaste = {False}  
+    covidTaste = {False}
 else:
     if {covidTaste} !IN {yesList[*]}:
         Goto: promptTaste
-    covidTaste = {True}  
+    covidTaste = {True}
 
 
 @promptFatigue
@@ -371,11 +375,11 @@ if {covidFatigue} IN {detailsList[*]}:
     Name Speak: "Robbie", "It is important for record keeping to keep track of symptoms related to Covid-19. Thank you for helping test the Neon Covid-19 screener."
     Goto: promptFatigue
 if {covidFatigue} IN {noList[*]}:
-    covidFatigue = {False}  
+    covidFatigue = {False}
 else:
     if {covidFatigue} !IN {yesList[*]}:
         Goto: promptFatigue
-    covidFatigue = {True}  
+    covidFatigue = {True}
 
 
 @promptNausea
@@ -385,11 +389,11 @@ if {covidNausea} IN {detailsList[*]}:
     Name Speak: "Robbie", "It is important for record keeping to keep track of symptoms related to Covid-19. Thank you for helping test the Neon Covid-19 screener."
     Goto: promptNausea
 if {covidNausea} IN {noList[*]}:
-    covidNausea = {False}  
+    covidNausea = {False}
 else:
     if {covidNausea} !IN {yesList[*]}:
         Goto: promptNausea
-    covidNausea = {True}  
+    covidNausea = {True}
 
 
 #HIGH RISK
@@ -406,11 +410,11 @@ if {covidLungs} IN {detailsList[*]}:
     Name Speak: "Robbie", "Chronic lung diseases include asthma, chronic obstructive pulmonary disease, chronic bronchitis or emphysema, or other chronic conditions associated with impaired lung function or that require home oxygen. People with ongoing medical conditions are more at risk of severe symptoms from Covid-19. Thank you for helping test the Neon Covid-19 screener."
     Goto: promptLungs
 if {covidLungs} IN {noList[*]}:
-    covidLungs = {False}  
+    covidLungs = {False}
 else:
     if {covidLungs} !IN {yesList[*]}:
         Goto: promptLungs
-    covidLungs = {True}  
+    covidLungs = {True}
 
 
 @promptHeart
@@ -420,11 +424,11 @@ if {covidHeart} IN {detailsList[*]}:
     Name Speak: "Robbie", "Congestive heart failure includes coronary artery blockage, heart attack, valve disease or congenital heart disease, and resulting in the heart not being able to pump efficiently and reduced blood flow. People with ongoing medical conditions are more at risk of severe symptoms from Covid-19. Thank you for helping test the Neon Covid-19 screener."
     Goto: promptHeart
 if {covidHeart} IN {noList[*]}:
-    covidHeart = {False}  
+    covidHeart = {False}
 else:
     if {covidHeart} !IN {yesList[*]}:
         Goto: promptHeart
-    covidHeart = {True}  
+    covidHeart = {True}
 
 
 @promptDiabetes
@@ -435,11 +439,11 @@ if {covidDiabetes} IN {detailsList[*]}:
     Name Speak: "Robbie", "Complications of diabetes include limb amputation, kidney disease, vision problems, heart disease, history of stroke, or, especially uncontrolled diabetes or other complications. People with ongoing medical conditions are more at risk of severe symptoms from Covid-19. Thank you for helping test the Neon Covid-19 screener."
     Goto: promptDiabetes
 if {covidDiabetes} IN {noList[*]}:
-    covidDiabetes = {False}  
+    covidDiabetes = {False}
 else:
     if {covidDiabetes} !IN {yesList[*]}:
         Goto: promptDiabetes
-    covidDiabetes = {True}  
+    covidDiabetes = {True}
 
 
 @promptNeuroCough
@@ -450,11 +454,11 @@ if {covidNeuroCough} IN {detailsList[*]}:
     Name Speak: "Robbie", "Neurological conditions that weaken ability to cough include disorders of the brain, spinal cord, peripheral nerve, and muscle such as cerebral palsy, epilepsy [seizure disorders], stroke, intellectual disability, moderate to severe developmental delay, muscular dystrophy, or spinal cord injury. People with ongoing medical conditions are more at risk of severe symptoms from Covid-19. Thank you for helping test the Neon Covid-19 screener."
     Goto: promptNeuroCough
 if {covidNeuroCough} IN {noList[*]}:
-    covidNeuroCough = {False}  
+    covidNeuroCough = {False}
 else:
     if {covidNeuroCough} !IN {yesList[*]}:
         Goto: promptNeuroCough
-    covidNeuroCough = {True}  
+    covidNeuroCough = {True}
 
 
 @promptWeakImmune
@@ -464,11 +468,11 @@ if {covidWeakImmune} IN {detailsList[*]}:
     Name Speak: "Robbie", "A weakened immune system includes seeing a doctor for cancer and treatment such as chemotherapy or radiation, receiving an organ or bone marrow transplant, taking high doses of oral steroids or other immunosuppressant medications, HIV or AIDS. People with ongoing medical conditions are more at risk of severe symptoms from Covid-19. Thank you for helping test the Neon Covid-19 screener."
     Goto: promptWeakImmune
 if {covidWeakImmune} IN {noList[*]}:
-    covidWeakImmune = {False}  
+    covidWeakImmune = {False}
 else:
     if {covidWeakImmune} !IN {yesList[*]}:
         Goto: promptImmune
-    covidWeakImmune = {True}  
+    covidWeakImmune = {True}
 
 
 @promptDialysis
@@ -478,11 +482,11 @@ if {covidDialysis} IN {detailsList[*]}:
     Name Speak: "Robbie", "Dialysis includes any type of dialysis, and kidney diseases are not specified in the CDC guide recommendations. Additional details in progress. Thank you for helping test the Neon Covid-19 screener."
     Goto: promptDialysis
 if {covidDialysis} IN {noList[*]}:
-    covidDialysis = {False}  
+    covidDialysis = {False}
 else:
     if {covidDialysis} !IN {yesList[*]}:
         Goto: promptDialysis
-    covidDialysis = {True}  
+    covidDialysis = {True}
 
 
 @promptLiver
@@ -492,11 +496,11 @@ if {covidLiver} IN {detailsList[*]}:
     Name Speak: "Robbie", "Liver disease includes cirrhosis of the liver, chronic hepatitis or other liver disease, not are not specified in the CDC Covid-19 screening guide recommendations. Additional details in progress. People with ongoing medical conditions are more at risk of severe symptoms from Covid-19. Thank you for helping test the Neon Covid-19 screener."
     Goto: promptLiver
 if {covidLiver} IN {noList[*]}:
-    covidLiver = {False}  
+    covidLiver = {False}
 else:
     if {covidLiver} !IN {yesList[*]}:
         Goto: promptLiver
-    covidLiver = {True}  
+    covidLiver = {True}
 
 
 @promptObesity
@@ -506,11 +510,11 @@ if {covidObesity} IN {detailsList[*]}:
     Name Speak: "Robbie", "Extreme obesity is Body Mass Index [BMI] greater than or equal to 40. People with ongoing medical conditions are more at risk of severe symptoms from Covid-19. Additional details in progress. Thank you for helping test the Neon Covid-19 screener."
     Goto: promptObesity
 if {covidObesity} IN {noList[*]}:
-    covidObesity = {False}  
+    covidObesity = {False}
 else:
     if {covidObesity} !IN {yesList[*]}:
         Goto: promptObesity
-    covidObesity = {True}  
+    covidObesity = {True}
 
 
 @promptPregnancy
@@ -520,17 +524,17 @@ if {covidPregnancy} IN {detailsList[*]}:
     Name Speak: "Robbie", "Pregnancy and recent pregnancy are considered ongoing medical conditions in the CDC Covid-19 screening guide. People with ongoing medical conditions are more at risk of severe symptoms from Covid-19. Thank you for helping test the Neon Covid-19 screener."
     Goto: promptPregnancy
 if {covidPregnancy} IN {noList[*]}:
-    covidPregnancy = {False}  
+    covidPregnancy = {False}
 else:
     if {covidPregnancy} !IN {yesList[*]}:
         Goto: promptPregnancy
-    covidPregnancy = {True}  
+    covidPregnancy = {True}
 
 
 # CALCULATE COMORBIDITIES AND ADVERSE RISKS
 
 
-Python: covidComorbiditiesCount = {covidLungs} + {covidHeart} + {covidDiabetes} + {covidNeuroCough} + {covidDialysis} + {covidLiver} + {covidObesity} + {covidPregnancy)
+Python: covidComorbiditiesCount = {covidLungs} + {covidHeart} + {covidDiabetes} + {covidNeuroCough} + {covidDialysis} + {covidLiver} + {covidObesity} + {covidPregnancy}
 
 
 if {covidComorbiditiesCount} >0 :
@@ -547,13 +551,13 @@ if {covidComorbiditiesCount} >0 :
 Name Speak: "Robbie", "{userRef3C} live in a nursing home or other long-term care facility?", "Do you or the person you are calling about live in a nursing home or other long-term care facility?"
 voice_input(covidNursingHome)
 if {covidNursingHome} IN {noList[*]}:
-    covidNursingHome = {False}  
+    covidNursingHome = {False}
 else:
     if {covidNursingHome} !IN {yesList[*]}:
         Goto: promptNursingHome
-    covidNursingHome = {True}  
-    covidCareGiver = {False}  
-    Name Speak: "Robbie", "It is important that you immediately report these symptoms to your nursing home or care facility immediately, including shortness of breath, fever or cough." 
+    covidNursingHome = {True}
+    covidCareGiver = {False}
+    Name Speak: "Robbie", "It is important that you immediately report these symptoms to your nursing home or care facility immediately, including shortness of breath, fever or cough."
     Goto: G-careFacilityReport
 
 
@@ -562,12 +566,12 @@ Name Reconvey: "Robbie", "{userRef3C} been involved as a worker, student or volu
 # Details: in the last two weeks worked or volunteered in a hospital, emergency room, clinic, medical office, ambulance service, first responder services, or any health care setting, or taken care of patients as a student as a part of your/their work?
 voice_input(covidCareGiver)
 if {covidCareGiver} IN {noList[*]}:
-    covidCareGiver = {False}  
+    covidCareGiver = {False}
 else:
     if {covidCareGiver} !IN {yesList[*]}:
         Goto: promptCareGiver
-    covidCareGiver = {True}  
-    Name Speak: "Robbie", "It is important that you immediately report your symptoms to the occupational health provider for the care facility where you were involved, including shortness of breath, fever or respiratory symptoms." 
+    covidCareGiver = {True}
+    Name Speak: "Robbie", "It is important that you immediately report your symptoms to the occupational health provider for the care facility where you were involved, including shortness of breath, fever or respiratory symptoms."
     Goto: F-careGiverReport
 
 
@@ -642,7 +646,7 @@ if {covidEmergencyCount} >0 :
 
 # CALCULATE E-callMedicalProvider DISPOSITION
 # TODO: '*' is not a valid character
-Python: covidProvider24Count = {covidBreath} + ( {covidFever} * {covidComorbiditiesCount} ) + ( {covidCough} * {covidComorbiditiesCount} ) 
+Python: covidProvider24Count = {covidBreath} + ( {covidFever} * {covidComorbiditiesCount} ) + ( {covidCough} * {covidComorbiditiesCount} )
 if {covidProvider24Count} >0 :
     Name Speak: "Robbie", "People with the reported symptoms are advised to call a medical provider within 24 hours, and are encouraged to participate in tele-health options from their health care provider."
     Goto: E-callMedicalProvider
@@ -660,7 +664,7 @@ if {covidBreath}:
 # CALCULATE H-selfCare DISPOSITION
 
 
-Python: covidStayHomeCount = {covidFever} + {covidFever} + {covidCough} 
+Python: covidStayHomeCount = {covidFever} + {covidFever} + {covidCough}
 
 
 if {covidStayHomeCount} >0 :

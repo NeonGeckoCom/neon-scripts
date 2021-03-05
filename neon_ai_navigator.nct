@@ -1,5 +1,7 @@
 Script: "Neon AI Navigator"
 Variable: options = table_scrape(https://neon.ai)
+Variable: chosen
+
 Neon speak: "Please tell me what Neon AI web page you'd like to see. You can say things like {random(options)} or say quit or exit."
 LOOP WN
     voice_input(chosen)
