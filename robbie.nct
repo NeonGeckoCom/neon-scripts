@@ -121,7 +121,7 @@ Name Reconvey: "Robbie", "Got it {userName}.", "Got it"
 @promptIll
 # Name Speak: "Robbie", "This audio guide is for people who are ill. {userRef2C} ill?"
 Name Reconvey: "Robbie", "This audio guide is for people who are ill"
-Name Reconvey: "Robbie", "Are you ill of contacting on behalf of someone who is ill?"
+Name Reconvey: "Robbie", "Are you ill or contacting on behalf of someone who is ill?"
 
 # "Are you ill (or contacting on behalf of someone who is ill)?"
 voice_input(covidIll)
