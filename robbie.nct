@@ -117,7 +117,7 @@ Name Reconvey: "Robbie", "Got it {userName}.", "Got it"
 @promptIll
 # Name Speak: "Robbie", "This audio guide is for people who are ill. {userRef2C} ill?"
 Name Reconvey: "Robbie", "This audio guide is for people who are ill"
-Name Reconvey: "Robbie", "Are you ill of contacting on behalf of someone who is ill?"
+Name Reconvey: "Robbie", "Are you ill or contacting on behalf of someone who is ill?"
 
 # "Are you ill (or contacting on behalf of someone who is ill)?"
 voice_input(covidIll)
@@ -489,7 +489,7 @@ else:
 Name Speak: "Robbie", "{userRef3C} have cirrhosis of the liver, chronic hepatitis or other liver disease?"
 voice_input(covidLiver)
 if {covidLiver} IN {detailsList[*]}:
-    Name Speak: "Robbie", "Liver disease includes cirrhosis of the liver, chronic hepatitis or other liver disease, not are not specified in the CDC Covid-19 screening guide recommendations. Additional details in progress. People with ongoing medical conditions are more at risk of severe symptoms from Covid-19. Thank you for helping test the Neon Covid-19 screener."
+    Name Speak: "Robbie", "Liver disease includes cirrhosis of the liver, chronic hepatitis or other liver disease, are not specified in the CDC Covid-19 screening guide recommendations. Additional details in progress. People with ongoing medical conditions are more at risk of severe symptoms from Covid-19. Thank you for helping test the Neon Covid-19 screener."
     Goto: promptLiver
 if {covidLiver} IN {noList[*]}:
     covidLiver = {False}
@@ -772,7 +772,7 @@ screeningReport = "{screeningReport} \nComorbidities Total {covidComorbiditiesCo
 screeningReport = "{screeningReport}Nursing Home or Facility {covidNursingHome} "
 screeningReport = "{screeningReport}, Care Giving {covidCareGiver} "
 
-Name Speak: "Robbie", "<prosody rate="x-fast">This is your Screening Report {screeningReport}</prosody>"
+Name Speak: "Robbie", "<prosody rate='x-fast'>This is your Screening Report {screeningReport}</prosody>"
 
 Name Speak: "Robbie", "Report ready to email. Say cancel to not send the email, or say send to send."
 voice_input(userInput)
@@ -810,6 +810,6 @@ if {askReturnValue} IN {yesList[*]}:
 #            Name Speak: "Robbie", "</speak>Neon run the script menu script starting at SCRIPTENTRY"
 #            exit
 
-Name Speak: "Robbie", "Thank you {userName} for helping me practice my conversational skills and letting me practice help you."
+Name Speak: "Robbie", "Thank you {userName} for helping me practice my conversational skills and letting me practice helping you."
 
 exit
