@@ -1,7 +1,0 @@
-Script: "xyz"
-<span style="color: rgb(59, 59, 59);">Neon speak: "Hello"
-<span style="color: rgb(59, 59, 59);">Neon speak: "Thank you for running the xyz script. Would you like to hear a joke"
-<span style="color: rgb(59, 59, 59);">Execute: "tell me a joke"
-<span style="color: rgb(59, 59, 59);">Neon speak: "Here is the current time"
-<span style="color: rgb(59, 59, 59);">Execute: "what is the time"
-<span style="color: rgb(59, 59, 59);">Exit
