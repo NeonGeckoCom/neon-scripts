@@ -1,4 +1,4 @@
-Script: "Pat Master"
+Script: "Pat"
 Language: "en-us male"
 
 # Help I can't get up ..
@@ -55,7 +55,7 @@ Variable: askPrompt
 Variable: returnLabel
 Variable: heardSilence
 Variable: falseAlarmCount
-Variable: askReturnValue
+Variable: askReturnValue = ""
 Variable: userName
 Variable: moreAppInfo
 Variable: customizeSettings
