@@ -1,7 +1,7 @@
 Script: Test Upload
-Author: Daniel McKnight 
-Description: This is only a test
+Author: Daniel McKnight
+    Description:     This is only a test
 # Comment line 
-
-# Above was a newline 
+    Neon speak:     Upload success
+# Above was a newline
 Exit
